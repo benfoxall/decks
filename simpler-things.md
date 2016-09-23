@@ -1,3 +1,4 @@
+build-lists: true
 
 ![](images/simpler-things.png)
 
@@ -20,56 +21,45 @@
 * You will have heard about it earlier today
 * Is anyone using pusher for their hacks?
 
----
-
-# [fit] and also other stuff
-
-^
+^ I also do other stuff
 * js oxford
+* summer of hacks
 * render
-* other stuff
+* surfing
 
 
 ---
 
 # ~
 
-^ Usually I give interactive talks, though this one is a bit more straightforward, though it's about something
+^ Usually I give interactive technical talks, though this is going to be a short "thought piece" or whatever. I've found it surprisingly hard to put together
 
 ---
 
+# I think we should try to make __simple things__
 
-# What is simple thing
+^ this is what I'm here to say - and I think today at this hack day, it's particularly important.  It's always really tempting to get carried away with an idea
 
-^ So, I'm here to talk about simple things - lets think about what a simple thing is, like, literally.
-
----
-
-# Simple
-
-> Easily understood or done; presenting no difficulty
-
-^ First of all, what is simplicity.  It's something that is easy to understand or do
+^ Last year I was at a hack day, and tried to build a car that would scan in it's environment with ultrasonic sensors.  By the end of the day I could get it to turn around…
 
 ---
 
-# Thing
+## [fit] A Simple Thing
 
-> An object that one need not, cannot, or does not wish to give a specific name to.
+1. Easily described & understood
+2. A self contained _object_
+3. Open to purpose
 
-> <br >"Look at that metal rail thing over there"
+^ What is a simple thing?
 
+^ What I mean by a simple thing:
+* easily understood
+* a contained _object_
+* the purpose isn't clearly defined
 
-^ "look at that metal rail thing over there"
-^ There's a vageness to this - a casual
+^ simple - "Easily understood or done; presenting no difficulty"
+^ thing - "An object that one need not, cannot, or does not wish to give a specific name to."
 
-
----
-
-
-# Some properties of a simple thing
-
-^ So, let's think of an example simple thing, and go from there.
 
 
 ---
@@ -83,13 +73,70 @@
 
 ---
 
-# 1. Understanding
+![](images/tapes.jpg)
 
-^ First of all, something isn't simple just on it's own - it relies on someone being able to understand it.  You need to know the context of what someone is using them the thing is.
+---
 
-^ Simplicty is subjetive
+![](images/el3302.jpg)
 
-^ First of all, for something to be simple, it has to be understood by someone.  If that person is you.
+<!-- EL 3302  By mib18 at German Wikipedia - Own work, CC BY-SA 3.0 -->
+
+^ Once you've got a solid concept of what your _thing_ is, then the stuff around it can be improved.
+
+^ The first tape players came out around 1963. I really like the look of this one, it's got a really analogue-y look to it.
+
+^ dates:
+* 1963 - introduction (+ initial mono players)
+* 1968 - portable players
+* 1979 - walkman
+
+
+<!--
+---
+
+![](images/cassette-player.jpg)-->
+
+---
+
+![](images/walkman.jpg)
+
+^ TODO
+
+^ Compact Cassette players weren't locked into a particular way of looking
+
+---
+
+![](images/walkman.jpg)
+
+> My freedom thus consists in my moving about within the narrow frame that I have assigned to myself for each one of my undertakings. I shall go even further: **my freedom will be so much the greater and more meaningful the more narrowly I limit my field of action and the more I surround myself with obstacles**. Whatever diminishes constraint diminishes strength. The more constraints one imposes, the more one frees oneself of the claims that shackle the spirit.
+
+
+Igor Stravinsky
+
+^ Constraints are freedom
+
+
+---
+
+
+![](images/music.png)
+
+^ All music wasn't created in the
+
+^  Improvement requires standards
+
+^ One of the reasons that this could be improved upon was that it had a strong standard - the shape of the tape didn't change over time.
+
+^ Usefulness requires constraint
+
+
+
+<!-- ---
+
+![](images/boombox.jpg)
+
+^ TODO -->
+
 
 ---
 
@@ -102,9 +149,15 @@
 ^ For something to be simple, it needs to be understood, for something to be understood it needs to be in the hands of someone else.
 
 
----
+^ First of all, something isn't simple just on it's own - it relies on someone being able to understand it.  You need to know the context of what someone is using them the thing is.
 
-## Simplicty requires Empathy
+^ Simplicty is subjective
+
+^ If you think something is simple, that doesn't mean that other people do
+
+^ First of all, for something to be simple, it has to be understood by someone.  If that person is you.
+
+^ Simplicty requires Empathy
 
 ^ When you're making something, understand how someone is going to interact with it.  Put yourself in their shoes.
 
@@ -112,17 +165,16 @@
 
 ^ At best they won't understand it.
 
----
-
-# 2. Composability
-
-^ If something is simple, then there's a good chance it could be *repurposed* for something else.
 
 ---
 
 ![](images/horizons.jpg)
 
 ^ This is the Cassette tape being used for a completely different thing - loading a program into a ZX Spectrum. This wasn't designed to be this way, though it works because the concept was simple and generic enougg about
+
+^ Composability
+
+^ If something is simple, then there's a good chance it could be *repurposed* for something else.
 
 ---
 
@@ -132,72 +184,26 @@
 
 ^ Extension doesn't even have to use the object you've created - but can use the thing it connects to
 
----
+^ Composability requires openness
 
-## Composability requires openness
-
-
-^ If you're abel to make something that's easy to understand, then you're more likely to see people doing different things with it.
-
----
-
-# 3. Improvement
-
-<!--
-dates:
-
-1963 - introduction (+ initial mono players)
-1968 - portable players
-1979 - walkman
--->
-
-^ Once you've got a solid concept of what your _thing_ is, then the stuff around it can be improved.
-
----
-
-![](images/el3302.jpg)
-
-<!-- EL 3302  By mib18 at German Wikipedia - Own work, CC BY-SA 3.0 -->
-
-^ The first tape players came out around 1963. I really like the look of this one, it's got a really analogue-y look to it.
-
-
-<!-- ---
-
-![](images/cassette-player.jpg) -->
-
----
-
-![](images/walkman.jpg)
-
-^ TODO
-
-<!-- ---
-
-![](images/boombox.jpg)
-
-^ TODO -->
-
----
-
-## Improvement requires standards
-
-^ One of the reasons that this could be improved upon was that it had a strong standard - the shape of the tape didn't change over time.
-
----
-
-# 4. Useful
-
----
-
-![](images/music.png)
-
-^ All music wasn't created in the
+^ If you're able to make something that's easy to understand, then you're more likely to see people doing different things with it.
 
 
 ---
 
-## Usefulness requires constraint
+![](images/minidisc.jpg)
+
+^ This is the minidisc - introduced
+^ Simple things can inspire others
+
+
+---
+
+![](images/minidisc.jpg)
+
+> We look at the present through a rear view mirror. We march backwards into the future.
+
+Marshall McLuhan
 
 ---
 
@@ -207,10 +213,14 @@ dates:
 
 # Some simple things
 
-* The button
-* Publishing Rooms
+* A button
+* A scanner
 
 ^ now we're going to go over some things that I have worked on that have been simple, and what came out of them.
+
+---
+
+# A button
 
 ---
 
@@ -234,7 +244,17 @@ dates:
 
 ---
 
+![60%](images/button-flappy-ben.png)
+
+![50%](images/button-fb.png)
+
+![23%](images/button-fb2.png)
+
+---
+
 ![fit](images/button-morse.png)
+
+^ Another thing we see a lot it morse code
 
 ---
 
@@ -246,40 +266,54 @@ dates:
 
 ---
 
-![](images/button-fb.png)
-
----
-
-![](images/button-fb2.png)
-
----
-
 ![](images/button-beat-box.png)
 
----
+<!-- ---
 
 ![](images/button-chuck-norris.jpg)
 
 ---
 
-![](images/button-graph.png)
+![](images/button-graph.png) -->
 
 ---
 
 ![fit](images/button-locked-in.png)
 
+^ This one is interesting.
+
+^ Inspired by Martin Pistorius, who suffered from Locked in Syndrome. For 13 years he was trapped in his own body.
+
+^ Interesting because it's being used for a completely different purpose from what we thought possible.
+
+^ Something actually meaningful with it
+
 ---
 
 ![fit](images/button-locked-in-reponse.png)
 
+^ We got a tweet from Martin about the hack
+
+^ I think this is the best feedback I can imagine for Pusher. To know that the thing we created has meaning
+
 ---
 
-… some stuff about that
+# ~
+
+^ Something that's interesting about the button is that it's implementation has completely changed 3 times over - but it hasn't mattered at all because the interface/object has stayed the same.
+
+<!-- ---
+
+… some stuff about that -->
 
 
 ---
 
-# Publishing Rooms
+# A scanner
+
+---
+
+![](images/scanner.jpg)
 
 ---
 
@@ -293,23 +327,15 @@ dates:
 
 ---
 
-![](images/PR-3.png)
-
----
-
-![](images/PR-3+4.png)
-
----
-
-![](images/PR-4.png)
-
----
-
 ![](images/PR-5.jpg)
 
 ---
 
-![](images/PR-6.jpg)
+![](images/PR.mp4)
+
+---
+
+![](images/PR-4.png)
 
 ---
 
@@ -325,301 +351,4 @@ dates:
 
 ---
 
-## Simple things are generative
-
----
-
 ## ~
-
----
-
-# How to make simple things
-
----
-
-
-![](images/walkman.jpg)
-
----
-
-# MiniDisc
-
-![](images/minidisc.jpg)
-
-^ I'm all about the future - so I got on board the next big thing… MiniDisc.  I swapped them with friends - I even bought pre-mastered minidiscs (californication by red hot chilli peppers)
-
----
-
-![](images/minidisc-first.jpg)
-
-^ Sony did the coolest minidisc players - I bought this one around 2001.
-
----
-
-
-![](images/minidisc-display.jpg)
-
-
-^ A few years later (2006), I wanted a new music player and since I had a bunch of minidiscs, I decided to upgrade my walkman.  I bought this new one.  It supported new formats LP2 & LP4, a new proprietary NetMD transfer (via sonic-stage).
-
-^ It was a mess.  It had lost the simplicity that I first chose the MiniDisc for
-
-^ Tiny side note.  Back in 2006, we used to think of headphone jacks as a good thing.
-
----
-
-# ~~MiniDisc~~
-
-^ It was time for me to abandon MiniDisc
-
----
-
-# iPod
-
-![](images/ipod.jpg)
-
-^ I'd been holding off on getting an iPod, I
-
-^ My iPod was one of the favourite devices I ever owned.
-
----
-
-![](images/ipod-charge.png)
-
-
----
-
-![](images/ipod-charge-play.png)
-
-^  I used to have an amp with phono plugs to 3.5mm jack.
-
-
----
-
-# [fit] Power ➔ Thing ➔ Music
-
----
-
-# an iPod is a _thing_
-
-
----
-
-# iPods are simple
-
----
-
-# [fit] Some things are less simple
-
----
-
-![](images/google-nexus-6p.jpg)
-
----
-
-## 1. Pretend it's a thing
-
----
-
-* User stories
-* Empathy
-* 5 Whys - root cause analysis
-
----
-
-## 2. Apps and Context
-
----
-
-# Camera-Phones
-
----
-
-# Multi-modal
-
----
-
-# Multi-modal
-# Multi-device
-
-
----
-
-# UI should dissapear
-
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
-# ~
-
-#///
-
-
----
-
-# (simple) things:
-
-^ Today I'm going to talk quickly about simple things. It's a bit of a hard topic to talk about, because I feel like I have to be really succinct about everything or else I'll be a hypocrite.
-
----
-
-# Compact Cassette
-
-![](images/compact-cassette.jpg)
-
-^ Cassette Tape - this is one of the
-
-
----
-
-![](images/cassette-player.jpg)
-
----
-
-![](images/walkman.jpg)
-
----
-
-# MiniDisc
-
-![](images/minidisc.jpg)
-
-^ I'm all about the future - so I got on board the next big thing… MiniDisc.  I swapped them with friends - I even bought pre-mastered minidiscs (californication by red hot chilli peppers)
-
----
-
-![](images/minidisc-first.jpg)
-
-^ Sony did the coolest minidisc players - I bought this one around 2001.
-
----
-
-
-![](images/minidisc-display.jpg)
-
-
-^ A few years later (2006), I wanted a new music player and since I had a bunch of minidiscs, I decided to upgrade my walkman.  I bought this new one.  It supported new formats LP2 & LP4, a new proprietary NetMD transfer (via sonic-stage).
-
-^ It was a mess.  It had lost the simplicity that I first chose the MiniDisc for
-
-^ Tiny side note.  Back in 2006, we used to think of headphone jacks as a good thing.
-
----
-
-# ~~MiniDisc~~
-
-^ It was time for me to abandon MiniDisc
-
----
-
-# iPod
-
-![](images/ipod.jpg)
-
-^ I'd been holding off on getting an iPod, I
-
-^ My iPod was one of the favourite devices I ever owned.
-
----
-
-![](images/ipod-charge.png)
-
-
----
-
-![](images/ipod-charge-play.png)
-
-^  I used to have an amp with phono plugs to 3.5mm jack.
-
-
----
-
-# [fit] Power ➔ Thing ➔ Music
-
----
-
-# an iPod is a _thing_
-
-
----
-
-# iPods are simple
-
----
-
-# [fit] Some things are not simple things
-
----
-
-![](images/google-nexus-6p.jpg)
-
----
-
-# Apps & Context
-
----
-
-
-![](images/camera.png)
-
-^ When
-
-
----
-
-![](images/button.jpg)
-
----
-
-![](images/button-inner.jpg)
-
-
-<!--
-
----
-
-# The Button
-
-[picture of button]
-
----
-
-# Why did we want a button
-
-> "Pusher is a hosted realtime service which makes it easy to share backend events and data with your front-end users through our web and native front-end libraries."
-
----
-
-
-# Why did we want a button
-
-
-> "Pusher is a hosted realtime service which makes it easy to share backend events and data with your front-end users through our web and native front-end libraries."
-
-
-> "Press this button and see that light go on"
-
----
-
-# Why it's good
-
----
-
-> The more constraints one imposes, the more one frees one's self. And the arbitrariness of the constraint serves only to obtain precision of execution.
--->
