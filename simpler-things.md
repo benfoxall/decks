@@ -1,5 +1,11 @@
 build-lists: true
 
+
+
+# Simpler Things
+
+---
+
 ![](images/simpler-things.png)
 
 ^ So, I'm here to talk quickly about simple things. It's a bit of a hard topic to talk about, because I feel like I have to be really succinct about everything or else I'll be a hypocrite.  But anyway - I'll give it a bit of try.
@@ -27,6 +33,11 @@ build-lists: true
 * render
 * surfing
 
+---
+
+<!-- # I do other stuff -->
+
+![40%](images/soh-light.png)
 
 ---
 
@@ -48,7 +59,7 @@ build-lists: true
 
 1. Easily described & understood
 2. A self contained _object_
-3. Open to purpose
+3. Open to purpose*
 
 ^ What is a simple thing?
 
@@ -73,9 +84,9 @@ build-lists: true
 
 ---
 
-![](images/tapes.jpg)
+<!-- ![](images/tapes.jpg)
 
----
+--- -->
 
 ![](images/el3302.jpg)
 
@@ -104,17 +115,15 @@ build-lists: true
 
 ^ Compact Cassette players weren't locked into a particular way of looking
 
----
+<!-- ---
 
 ![](images/walkman.jpg)
 
-> My freedom thus consists in my moving about within the narrow frame that I have assigned to myself for each one of my undertakings. I shall go even further: **my freedom will be so much the greater and more meaningful the more narrowly I limit my field of action and the more I surround myself with obstacles**. Whatever diminishes constraint diminishes strength. The more constraints one imposes, the more one frees oneself of the claims that shackle the spirit.
+> my freedom will be so much the greater and more meaningful the more narrowly I limit my field of action and the more I surround myself with obstacles. -->
 
-
-Igor Stravinsky
+<!-- Igor Stravinsky -->
 
 ^ Constraints are freedom
-
 
 ---
 
@@ -315,11 +324,15 @@ Marshall McLuhan
 
 ![](images/scanner.jpg)
 
+^ This is a simple object
+
 ---
 
 ![left](images/PR-0.jpg)
 
 ![right](images/PR-1.jpg)
+
+^ We got 40 scanners & plugged them into Pi
 
 ---
 
@@ -352,3 +365,51 @@ Marshall McLuhan
 ---
 
 ## ~
+
+---
+
+# Simple things
+
+---
+
+## Keep it simple, stupid
+
+^ coined by Kelly Johnson
+^ Locheed Skunkworks - Spyplanes
+^ Don't like this - down on people
+
+---
+
+## Keep it simple stupid
+
+^ Kelly never used the comma
+^ design things for stupid tools
+
+---
+
+### Simplicity needs empathy
+
+---
+
+### Implementation doesn't matter if you've got a thing
+
+---
+
+![](images/button-inner.jpg)
+
+^ we went through 3 backends
+
+---
+
+### Build things that are open to purpose
+
+---
+
+# Thanks
+
+## @benjaminbenben
+## @pusher
+
+### pusher.com
+### button.pusher.io
+### publishingrooms.com
