@@ -45,15 +45,37 @@ theme: Zurich, 2
 
 ---
 
-# Meetups
+# Evening Meetups <br/>Hack days
 
 ---
 
-# Mega Meetups
+# Sometimes with
+# – Oxford Python <br/>– PHP Oxford
 
 ---
 
-# Super Mega Meetups
+# [fit] Mega <br/>Meetups
+
+---
+
+# Last month with
+
+# Oxford Python, OxRUG, Codebar, dotnetoxford, DevOpsOxford, Drupal & WPOx
+
+---
+
+# [fit] The
+# [fit] Oxford
+
+---
+
+# [fit] Mega
+# [fit] Super
+
+---
+
+# [fit] Meetup
+# [fit] Meetup
 
 ---
 
@@ -61,27 +83,19 @@ theme: Zurich, 2
 
 ---
 
-[i feel like these are important - it's really valuable to learn about new perspectives]
-
-[tech communities tend to be in little bubbles - you can gain a lot from getting a new perspective]
-
-[new perspectives are as important]
-
----
-
 # [fit] HTTP
 
 ---
 
 # [fit] HTTP
 
-## [fit] …isn't all that great
+## [fit] kind of sucks
 
 ---
 
 # [fit] HTTP
 
-## [fit] …isn't all that great
+## [fit] kind of sucks
 
 ### (sometimes)
 
@@ -489,17 +503,27 @@ Content-Length: 15
 ---
 
 # A Thing
-# Isn't what it's made from
-
 
 ---
 
-# [fit] It's tempting to think that
-## [fit] our job is about writing code
+# A Thing
+# Isn't what it's made from
+
+---
+
+![](day-of-rest-assets/teapot.jpg)
+
+---
+
+# [fit] Our work isn't just code
 
 ```php
 print '<b>hello <i>world</B></i>';
 ```
+
+---
+
+# [fit] Our work is the things our code does
 
 <!---
 
@@ -530,20 +554,31 @@ print '<b>hello <i>world</B></i>';
 
 ---
 
-# Question time:
+# Ask yourself some questions:
+
+---
+
 ## 1. What does your thing do?
 
 ---
 
-# Question time:
 ## 1. What does your thing do?
 ## 2. Could it be doing that better?
 
 ^ _This_ is where it could be improved. It's not necessarily about adopting a new standard, or cleaning up code, it's about being purpose driven
 
+
+<!--
 ---
 
 # Sometimes we fix solutions instead of problems
+
+-->
+
+
+---
+
+# A Thing
 
 ---
 
@@ -595,8 +630,13 @@ Alternatives:
 
 # A Thing
 
+---
+
+# A Thing
+
 # Doesn't have to be simple
 
+## (but it can be)
 
 ---
 
@@ -608,30 +648,9 @@ Alternatives:
 
 ![](day-of-rest-assets/blackbird.jpg)
 
-^ …the blackbird
+^ …a blackbird
 
 ---
-
-# [fit] The SR-71 avoided threats using
-
-## [fit] 1/ altitude
-## [fit] 2/ speed
-
----
-
-# 80,000 feet
-
-![original](day-of-rest-assets/blackbird-83k.jpg)
-
----
-
-![](day-of-rest-assets/blackbird-pilots.jpg)
-
-<!-- http://www.salimbeti.com/aviation/images/equip/sr71pilots70s.jpg-->
-
----
-
-# Mach 3+
 
 
 ![original](day-of-rest-assets/blackbird-sta.jpg)
@@ -639,28 +658,72 @@ Alternatives:
 
 ---
 
-# "A thing that flies
-
-# [fit] very high &
-# [fit] very fast"
+![original](day-of-rest-assets/blackbird-83k.jpg)
 
 ---
 
-
-
-
-
+![](day-of-rest-assets/blackbird-pilots.jpg)
 
 
 ---
 
-
-> For more information, watch __Skunk Works__ by __Nickolas Means__
-
+# [fit] The SR-71 is still just a thing
 
 ---
 
+# A thing that
 
+# [fit] flies **very** fast<br />& **very** high up
+
+---
+
+# Once you have decided what your thing is, decisions become easier
+
+---
+
+<!--
+
+![](day-of-rest-assets/blackbird-cart.jpg)
+
+---
+
+-->
+
+![](day-of-rest-assets/blackbird-fuel.jpg)
+
+^ Starter cart & fuel
+
+---
+
+![fit](day-of-rest-assets/skunkworks.png)
+
+---
+
+![fit](day-of-rest-assets/kelly-johnson.jpg)
+
+^ Kelly Johnson
+
+---
+
+> Keep is Simple Stupid
+
+---
+
+> Keep is Simple, Stupid
+
+---
+
+# ~
+
+---
+
+> For more information, see __Skunk Works__ by __Nickolas Means__
+
+---
+
+# Let's look at our things
+
+---
 
 # ~
 
@@ -686,3 +749,7 @@ Photos:
 * By USAF/Brian Shul - Shul, Brian (1994). The Untouchables. Mach One. pp. 113–114. ISBN 0929823125., Public Domain, https://commons.wikimedia.org/w/index.php?curid=25099554
 
 * By Frontier India Defense and Strategic News Service - http://album.frontierindia.net/main.php?g2_itemId=112, CC BY-SA 2.5 in, https://commons.wikimedia.org/w/index.php?curid=3492838
+
+* By Jaydec at English Wikipedia, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=32480411
+
+* teapot By Marshall Astor (http://www.marshallastor.com/) - http://www.flickr.com/photo_zoom.gne?id=352811902&size=o (http://www.flickr.com/photos/lifeontheedge/352811902/), CC BY-SA 2.0, https://commons.wikimedia.org/w/index.php?curid=1743696
