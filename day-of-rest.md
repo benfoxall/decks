@@ -49,37 +49,23 @@ theme: Zurich, 2
 
 ---
 
-# Sometimes with
-# – Oxford Python <br/>– PHP Oxford
-
----
-
-# [fit] Mega <br/>Meetups
-
----
-
 # Last month with
 
 # Oxford Python, OxRUG, Codebar, dotnetoxford, DevOpsOxford, Drupal & WPOx
 
 ---
 
-# [fit] The
-# [fit] Oxford
-
----
-
-# [fit] Mega
-# [fit] Super
-
----
-
-# [fit] Meetup
-# [fit] Meetup
+# [fit] The Oxford
+# [fit] Mega Super
+# [fit] Meetup Meetup
 
 ---
 
 ![fit](day-of-rest-assets/msmm.png)
+
+
+^ The tech community is great, though sometimes we get stuck in a bit of a bubble
+^ It's really valuable to hear a viewpoint different from your own
 
 ---
 
@@ -101,8 +87,10 @@ theme: Zurich, 2
 
 ---
 
-# Reason 1.
-# HTTP was designed for wires
+# Problem 1.
+# HTTP was designed with wires in mind
+
+### wireless/flaky networks can be challenging
 
 ^ HTTP assumes a good network
 
@@ -113,52 +101,40 @@ GraphQL and h2 are ways of getting round this
 
 ---
 
-# Reason 2.
-# HTTP resources need constant uptime
-### even embedded & compute-constrained resources
+# Problem 2.
+# HTTP resources need to be constantly online
+### can be a issue for low-power devices
 <!--# HTTP wasn't designed for constrained devices
 # Resources have the compute power-->
 
 ^ something that it only on for an hour a day, or maybe even a second a day
 
-^ perhaps a good example, if we've got two resources
+---
+
+# Problem 3.
+# HTTP responses need a request
+
+### getting content to a client can be tricky
 
 ---
 
-# ~
+# The problems:
+
+# 1. Wireless<br/>2. Low energy devices<br/>3. P2P data flow
 
 ---
 
-# What I'm going to talk about today:
+# this sounds a bit like the
+# [fit] Internet <br/>of Things
 
 ---
 
-# What I'm going to talk about today:
-
-# [fit] Things
-
----
-
-## [fit] _The Internet of Things_
-
-## [fit] 1. Connecting things together
-## [fit] 2. How to design things
-## [fit] 3. Making use of things
-## [fit] 4. How to build useful things
+# [fit] Part 1.
+## A deep dive into IoT networks, and how they can fit with wordpress
 
 ---
 
-# ~
-
----
-
-# 1
-# [fit] Connecting things
-# [fit] together
-
----
-
-# Some example things
+# An example network of Things
 
 ---
 
@@ -217,14 +193,19 @@ Content-Length: 15
 * Opening ports
 * Responding to requests
 * Parsing request & headers
-* Understanding
+* Understanding http codes & header fields
 * Chunked encoding
 * Persistent connections
 * IP address changes
 
+<!--
+https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+-->
+
 ---
 
-# JSON is pretty challenging too
+# (JSON is pretty challenging too)
 
 ![inline](day-of-rest-assets/parse-json.png)
 
@@ -232,7 +213,8 @@ Content-Length: 15
 
 # Small devices
 
-* sketchy/variable network
+* variable network
+* sketchy network
 * low processing power
 * power consumption requirements
 
@@ -240,12 +222,12 @@ Content-Length: 15
 
 <!--# [fit] HTTP / JSON / REST-->
 
-# [fit] We're going to need
+<!-- # [fit] We're going to need
 # [fit] a smaller boat
 
 ![inline 100%](day-of-rest-assets/smaller-boat.gif)
 
----
+--- -->
 
 # [fit] MQTT
 
@@ -284,15 +266,58 @@ Content-Length: 15
 * Could be a hub in a smart home
 * Could be a box sitting in a field
 
----
-
-## nope
-# [fit] ~~REST~~
-# [fit] ~~HTTP~~*
 
 ---
 
-(MQTT over WebSockets)
+# topics, messages, wildcards
+
+![fit](day-of-rest-assets/broker.pdf)
+
+
+---
+
+# [fit] Connecting to a broker
+## ie. making initial contact
+## connect
+
+---
+
+```
+
+   Client                     Broker
+
+       ------- CONNECT ------->
+
+
+       <------ CONNACK --------
+
+```
+
+---
+
+## CONNECT & CONNACK - same fixed header (2 bytes)
+
+![80% inline](day-of-rest-assets/packet-fixed-header.pdf)
+
+---
+
+## CONNECT - additional header
+
+# 12 bytes
+
+* protocol number
+* flags (content in payload):
+  * last will
+  * username
+  * password
+
+---
+
+# 14 bytes to connect
+
+* 2 bytes - fixed header
+* 12 bytes - variable header
+* 0-n bytes - flag values
 
 ---
 
@@ -452,11 +477,55 @@ Content-Length: 15
 
 ---
 
-# Connecting to wordpress things
+## Bringing wordpress onto the network
 
 ---
 
-## MQTT to REST bridge
+## Expected outcome:
+
+## When we press the button, a page is updated
+## When a page is updated, lights flash
+
+---
+
+## An mqtt to wordpress bridge
+
+---
+
+```js
+mqtt-to-wp excerpt
+```
+
+---
+
+## wordpress to mqtt
+
+---
+
+```js
+wp-mqtt
+```
+
+---
+
+currently, we're going to use a plugin, though this would be
+way better to be exposed by the rest api.  So that the bridge could start and point events at a particular broker
+
+---
+
+# Demo
+
+---
+
+## MQTT to WP-REST
+
+---
+
+# Demo
+
+---
+
+# Keeping things in sync
 
 ---
 
@@ -498,7 +567,13 @@ Content-Length: 15
 
 ---
 
-# [fit] Thinking about things
+# ~
+
+---
+
+# [fit] Part 2.
+
+# How we can take inspiration from things?
 
 ---
 
@@ -507,15 +582,17 @@ Content-Length: 15
 ---
 
 # A Thing
-# Isn't what it's made from
+<!--# Isn't what it's made from-->
+# [fit] Is more than it's made from
 
 ---
-
+<!--
 ![](day-of-rest-assets/teapot.jpg)
 
----
+--->
 
-# [fit] Our work isn't just code
+<!--# [fit] There's more than <br />the implementation-->
+# [fit] The implementation <br/>is only part of it
 
 ```php
 print '<b>hello <i>world</B></i>';
@@ -523,7 +600,7 @@ print '<b>hello <i>world</B></i>';
 
 ---
 
-# [fit] Our work is the things our code does
+# [fit] Identifying a goal
 
 <!---
 
@@ -545,25 +622,40 @@ print '<b>hello <i>world</B></i>';
 
 ---
 
-![fit](day-of-rest-assets/nophone.png)
+# As a Team
+# We write User Stories
+# Because they help keep us focussed
 
 ---
+
+![fit](day-of-rest-assets/nophone.png)
+
+
+
+<!---
 
 # [fit] People use things
 # [fit] to do stuff
 
----
-
-# Ask yourself some questions:
+--->
 
 ---
 
-## 1. What does your thing do?
+# Some questions:
+
+## (think of a thing you've built)
 
 ---
 
-## 1. What does your thing do?
-## 2. Could it be doing that better?
+# Some questions:
+
+# [fit] 1. What does the thing do?
+
+---
+
+# Some questions:
+
+# [fit] 1. What does the thing do? <br/>2. Is it doing it?
 
 ^ _This_ is where it could be improved. It's not necessarily about adopting a new standard, or cleaning up code, it's about being purpose driven
 
@@ -628,6 +720,12 @@ Alternatives:
 
 ---
 
+# When you build something
+
+## Make sure it's a thing
+
+---
+
 # A Thing
 
 ---
@@ -677,10 +775,6 @@ Alternatives:
 
 ---
 
-# Once you have decided what your thing is, decisions become easier
-
----
-
 <!--
 
 ![](day-of-rest-assets/blackbird-cart.jpg)
@@ -713,28 +807,70 @@ Alternatives:
 
 ---
 
-# ~
+# Have a clear idea of what your thing is
+# Build that thing as simply as you can
 
 ---
 
-> For more information, see __Skunk Works__ by __Nickolas Means__
+> For way more about this, see __Skunk Works__ by __Nickolas Means__
 
 ---
 
-# Let's look at our things
+# A thing
 
 ---
 
-# ~
+# A thing
+
+## Should be a bit magical
 
 ---
+
+[magic trick]
+
+---
+
+# Practice the things you
+
+---
+
+# Slight of hand
+
+---
+
+# The things we carry around with us
 
 > INTRO TO NEXT SECTION
 > [PHOTO OF PHONE]
 > HOW DO WE THINK OF THIS AS A THING
 
 
+---
 
+[phone picture]
+
+---
+
+Battery
+
+```js
+navigator.getBattery()
+```
+
+---
+
+
+
+
+# ~
+
+---
+
+---
+
+Possible directions - how the web is changing:
+PWA & service workers
+- websites are becoming more of a thing.
 
 
 
