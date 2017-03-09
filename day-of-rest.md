@@ -147,7 +147,7 @@ It's not just about sensors, sometimes you need devices to be able to communicat
 ---
 
 # [fit] Part 1.
-## A deep dive into IoT networks, and how they can fit with WordPress
+## A __deep dive__ into IoT networking, and it can fit with WordPress
 
 ^
 By the end of this - I hope you'll have a DEEP Understanding of a particular IoT network and how it can fit with other stuff.
@@ -185,6 +185,8 @@ By the end of this - I hope you'll have a DEEP Understanding of a particular IoT
 # target outcome:
 
 # When I press this thing, these things should turn red
+
+### (wherever they are)
 
 ---
 
@@ -395,7 +397,7 @@ but tonnes compared to HTTP PUT GET etc
 
 # CONNECT payload
 
-* the actual username & password (if included)
+* the actual username & password (if required)
 
 ---
 
@@ -542,15 +544,26 @@ THOUGH - QOS is actually 1 now and we'll get to that
        <------ PUBLISH --------
 ```
 
-
 ---
 
 # Job Done
-# We can send & receive messages over a network of things
+# We can publish & subscribe to a network of things
 
 ---
 
-## MQTT feature:
+```php
+$socket = fsockopen('mqtt-host.com', 1883);
+
+$connect = constructConnectMessage();
+fwrite($socket, $connect, strlen($connect));
+
+$publish = constructPublishMessage('/hello', 'world!');
+fwrite($socket, $publish, strlen($connect));
+```
+
+---
+
+## One other thing:
 
 # [fit] QoS
 
@@ -567,23 +580,52 @@ THOUGH - QOS is actually 1 now and we'll get to that
 # QoS 0
 ## Fire and Forget
 
-![inline](day-of-rest-assets/qos-temp.jpg)
+
+```
+   Client               Broker              Client
+
+       ---- PUBLISH ---->
+
+   [delete]              ---- PUBLISH ---->
+```
+
 
 ---
 
 # QoS 1
-## "At least once delivery"
-## Delivery confirmation
+## At least once delivery
 
-![inline](day-of-rest-assets/qos-temp.jpg)
+```
+   Client               Broker              Client
+
+       ---- PUBLISH ---->
+
+                       [store]
+                            ---- PUBLISH ---->
+                       [delete]
+
+       <------ PUBACK ---
+  [delete]
+```
 
 ---
 
 # QoS 2
-## "At most once delivery"
-## Client receive confirmation
+## "Exactly once"
 
-![inline](day-of-rest-assets/qos-temp.jpg)
+
+```
+   Client               Broker              Client
+
+      ----- PUBLISH ---->
+                       [store]
+                            ---- PUBLISH ---->
+      <------ PUBACK ----
+      ------- PUBREL --->
+                       [delete]
+      <------ PUBCOMP ---
+  [delete]
+```
 
 ---
 
@@ -595,7 +637,7 @@ THOUGH - QOS is actually 1 now and we'll get to that
 # [fit] MQTT
 ## …that's about it
 
-### (security/encryption, last will, persistence, ping/pong)
+### (security/encryption, client IDs, last will, persistence, ping/pong)
 
 ---
 
@@ -607,37 +649,80 @@ THOUGH - QOS is actually 1 now and we'll get to that
 
 ---
 
-## For WordPress to be a Thing:
-
-## Subscribe to MQTT topics and update content
-## Publish messages to MQTT
+## 1/ Subscribe to MQTT topics
+## 2/ Publish messages to MQTT
 
 ---
 
-## An mqtt to WordPress bridge
+# Create an mqtt-wp bridge
 
----
+### (A script that forwards on messages)
 
-```js
-mqtt-to-wp excerpt
-```
-
----
-
-## WordPress to mqtt
+### [github/benfoxall/mqtt-wp](https://github.com/benfoxall/mqtt-wp)
 
 ---
 
 ```js
-wp-mqtt
+const WPAPI = require('wpapi')
+
+const wp = new WPAPI(config.wp)
+
+const update = (slug, content) =>
+  wp.pages().slug(slug)
+    .update({content})
+
+
+// update('my-thing', 'Sensor value: 4')
 ```
 
 ---
 
-currently, we're going to use a plugin, though this would be
-way better to be exposed by the rest api.  So that the bridge could start and point events at a particular broker
+```js
+const mqtt = require('mqtt')
+
+const client = mqtt.connect(config.mqtt_host)
+
+client.subscribe('my/sensor')
+
+client.on('message', (topic, buffer) => {
+  const content = escape(buffer.toString())
+  update('my-sensor', content)
+})
+
+```
 
 ---
+
+# Publishing messages
+
+---
+
+
+# Option 1:
+
+Via WP-MQTT
+➡︎ Nice and easy
+
+
+# Option 2:
+
+Via Webhooks
+➡︎ Better fit for a wp-bridge model
+
+---
+
+## WP-MQTT settings
+
+![fit original](day-of-rest-assets/wp-mqtt-1.png)
+
+![fit original](day-of-rest-assets/wp-mqtt-2.png)
+
+---
+
+![](day-of-rest-assets/wp-mqtt.pdf)
+
+---
+
 
 # Demo
 
@@ -699,7 +784,7 @@ Lambda, webhooks would allow you to do this at scale
 ---
 
 # Doing this at home
-## MQTT brokers
+## Electronics
 
 ---
 
@@ -712,9 +797,21 @@ BLE only at the moment, though I wrote a BLE to MQTT bridge
 
 ---
 
-## Espurino
+## Espruino
 
-![original 50%](day-of-rest-assets/espruino.png)
+![original 30%](day-of-rest-assets/espruino.png)
+
+---
+
+# BBC Micro Bit
+
+![original](day-of-rest-assets/bbc-microbit.jpg)
+
+^
+in 2015 every 11 year old in the UK got one
+1 million devices
+Able to buy online too
+
 
 ---
 
@@ -728,21 +825,11 @@ BLE only at the moment, though I wrote a BLE to MQTT bridge
 
 ![original](day-of-rest-assets/pi-w-adafruit.jpg)
 
----
-
-##
-
----
-
-# ~~~~
-
-
-
-^ Exit - we've now considered WordPress as a "thing".
 
 ---
 
 # ~
+
 
 ---
 
@@ -751,7 +838,9 @@ BLE only at the moment, though I wrote a BLE to MQTT bridge
 # How can we take inspiration from the way we build Things.
 
 
-^ Let's think of some properties of things, and how we can use them to inspire us
+^ We've now seen that wordpress can be a *thing*
+
+^ Let's think of some properties of things, and how we can use them to inspire us in software development
 
 ---
 
@@ -1172,87 +1261,118 @@ osc.start()
 
 ---
 
-# Service workers & progressive web apps
-
----
-
-# Web Bluetooth
-
----
-
-# Web Payments?
-
-# WebRTC
-
-# Chrome Cast - Presentation API
-
-# WebVR
-
 # IndexedDB
 
 ---
 
-
-
-
-notes:
-
-A thing that:
-* knows where it is in the world
-* knows what direction it's pointing
-* knows how bright it is
-* knows
-
-* sensor data
-  * geolocation
-  *
-* output
-* offline web technologies
-* web bluetooth - connecting to other devices nearby
-* processing power
-
----
-
-
-# The things we carry around with us
-
-> INTRO TO NEXT SECTION
-> [PHOTO OF PHONE]
-> HOW DO WE THINK OF THIS AS A THING
-
-
----
-
-[phone picture]
-
----
-
-Battery
+# [fit] Service <br>workers
 
 ```js
-navigator.getBattery()
+navigator.serviceWorker.register('/sw-test/sw.js')
 ```
 
 ---
 
+# [fit] Web <br>Bluetooth
 
-
-
-# ~
+```js
+navigator.bluetooth.requestDevice({
+  filters: [{
+    services: ['heart_rate'],
+  }]
+}).then(device => device.gatt.connect())
+```
 
 ---
 
+# [fit] Presentation API*
+
+```js
+new PresentationRequest([urls])
+  .start()
+```
+
 ---
 
-Possible directions - how the web is changing:
-PWA & service workers
-- websites are becoming more of a thing.
+# [fit] WebVR*
+
+```js
+navigator
+  .getVRDisplays()
+```
+
+---
+
+# Web content doesn't have to be
+
+---
+
+#
+
+---
+
+# [fit] Part 4.
+# How to build things that make a difference
+
+---
+<!--
+![](day-of-rest-assets/part-4-1.jpg)
+
+---
+
+![autoplay](day-of-rest-assets/part-4-2.mp4)
+
+^
+Firstly,
+being able to create something is great!
+
+--- -->
+
+# [fit] We're building things
+
+---
+
+# [fit] The usefulness of <br>a thing can be<br>assessed
+
+^
+We tend to think of ourselves as being asssesed by
+* page views
+* tweets
+* shares
+It's about the difference it makes to a person
+
+---
+
+![fit](day-of-rest-assets/last-flood-sensor.png)
+
+---
+
+![fit](day-of-rest-assets/last-flood-map.png)
+
+---
+
+![fit](day-of-rest-assets/last-gerard.png)
+
+---
+
+![fit](day-of-rest-assets/last-ador.png)
+
+---
+
+# [fit] When you're <br/>making <br/>something
+
+---
+
+# [fit] make<br>a difference<br>to someone
+
+---
+
+# [fit] Thank you
+
+## @benjaminbenben
 
 
-
-
-----
-
+<!--
 
 Photos:
 
@@ -1264,4 +1384,4 @@ Photos:
 
 * By Jaydec at English Wikipedia, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=32480411
 
-* teapot By Marshall Astor (http://www.marshallastor.com/) - http://www.flickr.com/photo_zoom.gne?id=352811902&size=o (http://www.flickr.com/photos/lifeontheedge/352811902/), CC BY-SA 2.0, https://commons.wikimedia.org/w/index.php?curid=1743696
+* teapot By Marshall Astor (http://www.marshallastor.com/) - http://www.flickr.com/photo_zoom.gne?id=352811902&size=o (http://www.flickr.com/photos/lifeontheedge/352811902/), CC BY-SA 2.0, https://commons.wikimedia.org/w/index.php?curid=1743696 -->
