@@ -4,10 +4,6 @@ theme: Zurich, 2
 
 ---
 
-# Thanks
-
----
-
 # I'm Ben
 
 ---
@@ -39,19 +35,23 @@ theme: Zurich, 2
 
 ![fit](day-of-rest-assets/oxford-us.png)
 
+^ 34 places in the US called Oxford
+
 ---
 
 ![80%](day-of-rest-assets/jsoxford.png)
 
 ---
 
-# Evening Meetups <br/>Hack days
+# Evening meet-ups <br/>Hack days
 
 ---
 
 # Last month with
 
-# Oxford Python, OxRUG, Codebar, dotnetoxford, DevOpsOxford, Drupal & WPOx
+# Oxford Python, OxRUG, Codebar, DotNetOxford, DevOpsOxford, Drupal & WPOx
+
+^ 8 groups together
 
 ---
 
@@ -64,8 +64,9 @@ theme: Zurich, 2
 ![fit](day-of-rest-assets/msmm.png)
 
 
-^ The tech community is great, though sometimes we get stuck in a bit of a bubble
-^ It's really valuable to hear a viewpoint different from your own
+^
+The tech community is great, though sometimes we get stuck in a bit of a bubble
+It's really valuable to hear a viewpoint different from your own
 
 ---
 
@@ -127,10 +128,29 @@ GraphQL and h2 are ways of getting round this
 # this sounds a bit like the
 # [fit] Internet <br/>of Things
 
+
+---
+
+## 1. Many small (movable) devices - wires become an issue
+## 2. Batteries - constrains compute resource
+## 3. Things need to be able to talk to each other
+
+^
+With everything being connected - wires become a problem
+Low power devices may last years on a battery, this means running an http server may be impossible
+It's not just about sensors, sometimes you need devices to be able to communicate with each other (windows open when too hot)
+
+
+
+
+
 ---
 
 # [fit] Part 1.
-## A deep dive into IoT networks, and how they can fit with wordpress
+## A deep dive into IoT networks, and how they can fit with WordPress
+
+^
+By the end of this - I hope you'll have a DEEP Understanding of a particular IoT network and how it can fit with other stuff.
 
 ---
 
@@ -243,18 +263,36 @@ https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 
 ## Telemetry Transport
 
----
+^ The word Telemetry means to get information from somewhere and receive it somewhere else
+
+<!-- ---
 
 * 1999 (with wireless in mind)
 * lightweight
 * publish subscribe topics
-* message redelivery
+* message redelivery -->
 
 ---
 
 ![cover](day-of-rest-assets/sat.jpg)
 
+^
+MQTT was built with a use case in mind
+Sensors on an oil pipeline wanting to transmit data through a satellite uplink
+Satellites orbit the earth, so they might come in and out of contact and that's completely expected.
+
 ---
+
+![fit](day-of-rest-assets/broker.pdf)
+
+---
+
+* publish subscribe
+* topics
+* wildcards
+* messages
+
+[todo]
 
 ![fit](day-of-rest-assets/broker.pdf)
 
@@ -263,27 +301,74 @@ https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 # MQTT Broker
 
 * Could be a satellite
-* Could be a hub in a smart home
+* Could be a hub in a home
 * Could be a box sitting in a field
+
+^
+A broker could be many things:
+A satellite
+A central hub in a smart home
+Sitting in a field
+
+---
+
+# MQTT Connection
+
+* Satellite radio
+* mesh network
+* bluetooth LE
+
+^
+The connecction is tcp/ip based, but fairly flexible
+Zigbee mesh network
+BLE services
+
+---
+
+# MQTT Connection
+
+* Stateful
+* Message based
+* Binary
+
+^ you've got a persistent connection and you're sending binary messages back and forth along it.
 
 
 ---
 
-# topics, messages, wildcards
+# Message structure
 
-![fit](day-of-rest-assets/broker.pdf)
+```
+        +----------------------+
+        |   fixed header       |
+        |----------------------|
+        |   variable header    |
+        |----------------------|
+        |   payload            |
+        +----------------------+
+```
 
+---
+
+# Message Types
+
+## CONNECT, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL, PUBCOMP, SUBSCRIBE, SUBACK, UNSUBSCRIBE, UNSUBACK, PINGREQ, PINGRESP & DISCONNECT
+
+^
+There are 14 types of message, and that's it
+but tonnes compared to HTTP PUT GET etc
+* these are at a higher level
+* HTTP actually has way more
 
 ---
 
 # [fit] Connecting to a broker
 ## ie. making initial contact
-## connect
+## CONNECT & CONNACK
 
 ---
 
 ```
-
    Client                     Broker
 
        ------- CONNECT ------->
@@ -295,25 +380,26 @@ https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 
 ---
 
-## CONNECT & CONNACK - same fixed header (2 bytes)
+# CONNECT fixed header
 
-![80% inline](day-of-rest-assets/packet-fixed-header.pdf)
+![original inline 70%](day-of-rest-assets/packet-fixed-header.pdf)
 
 ---
 
-## CONNECT - additional header
-
-# 12 bytes
+# CONNECT variable header
 
 * protocol number
-* flags (content in payload):
-  * last will
-  * username
-  * password
+* whether username & password are supplied
 
 ---
 
-# 14 bytes to connect
+# CONNECT payload
+
+* the actual username & password (if included)
+
+---
+
+# 'fourteen bytes' to connect
 
 * 2 bytes - fixed header
 * 12 bytes - variable header
@@ -325,40 +411,45 @@ https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 
 ## eg. on button press
 
-# publish '__/btn__' '__press__'
+# PUBLISH
 
 ---
 
-![80%](day-of-rest-assets/packet-fixed-header.pdf)
+# PUBLISH fixed header
+
+![original inline 70%](day-of-rest-assets/packet-fixed-header.pdf)
 
 ---
 
-![80%](day-of-rest-assets/packet-topic.pdf)
+# PUBLISH variable header
+
+![original inline 70%](day-of-rest-assets/packet-topic.pdf)
 
 ---
 
-![80%](day-of-rest-assets/packet-payload.pdf)
+# PUBLISH payload
+
+- the content of your message (**optional**)
+
+
+## publish /button/push **'count: 5'**
 
 ---
 
-![80%](day-of-rest-assets/packet-example.pdf)
-
----
-
-```php
-fwrite($this->socket,  $message)
+```
+⨽⨽⨽⨽/button/push
 ```
 
 ---
 
 ```
-⨽⨽⨽⨽/btnpress
+⨽⨽⨽⨽/button/push
 ```
 
 # vs
 
 ```
-POST /btn HTTP/1.1
+POST /button HTTP/1.1
 Host: benjaminbenben.com
 User-Agent: curl/7.51.0
 content-type: application/json
@@ -366,12 +457,16 @@ Accept: */*
 Cache-Control: no-cache
 Content-Length: 15
 
-{"state":"pressed"}
+{"action":"push"}
 ```
 
 ---
 
-# 13 bytes
+# 16 bytes
+
+---
+
+# 16 bytes
 
 # [fit] POST /btn HTT
 
@@ -381,18 +476,33 @@ Content-Length: 15
 
 ## eg. some lights
 
-# Subscribe '**/led/color**'
+# SUBSCRIBE
 
 ---
 
-![80%](day-of-rest-assets/packet-fixed-header-message-type.pdf)
+# SUBSCRIBE fixed header
+
+![original inline 70%](day-of-rest-assets/packet-fixed-header.pdf)
+
+^
+the same!
+THOUGH - QOS is actually 1 now and we'll get to that
 
 ---
 
-## Subscribing to a topic
+# SUBSCRIBE variable header
 
-1. Set the message type to 1000 (subscribe)
-2. Set payload to '/led/color'
+- Message identifier
+
+^ need a message identifier because QOS is one
+
+---
+
+# SUBSCRIBE payload
+
+- a list of topic names
+
+^ you give the length of each name, followed by the name (and QoS)
 
 <!--
 
@@ -419,8 +529,26 @@ Content-Length: 15
 
 ---
 
+# Receiving messages
+
+---
+
+# Receiving messages
+### (we already know this!)
+
+```
+   Client                     Broker
+
+       <------ PUBLISH --------
+```
 
 
+---
+
+# Job Done
+# We can send & receive messages over a network of things
+
+---
 
 ## MQTT feature:
 
@@ -428,7 +556,7 @@ Content-Length: 15
 
 ## For when you're not sure if your satellite is even there
 
-^ This is a feature that makes mqtt very different from http requests
+^ This is a feature that makes mqtt different from http requests, you can control how your message gets delivered
 
 ---
 
@@ -444,7 +572,7 @@ Content-Length: 15
 ---
 
 # QoS 1
-## "At most once delivery"
+## "At least once delivery"
 ## Delivery confirmation
 
 ![inline](day-of-rest-assets/qos-temp.jpg)
@@ -452,7 +580,7 @@ Content-Length: 15
 ---
 
 # QoS 2
-## "Exactly once delivery"
+## "At most once delivery"
 ## Client receive confirmation
 
 ![inline](day-of-rest-assets/qos-temp.jpg)
@@ -467,9 +595,7 @@ Content-Length: 15
 # [fit] MQTT
 ## …that's about it
 
-### (connect, receipt messages, last will, persistence)
-
-^ you sould prob
+### (security/encryption, last will, persistence, ping/pong)
 
 ---
 
@@ -477,18 +603,18 @@ Content-Length: 15
 
 ---
 
-## Bringing wordpress onto the network
+## Bringing WordPress onto the network
 
 ---
 
-## Expected outcome:
+## For WordPress to be a Thing:
 
-## When we press the button, a page is updated
-## When a page is updated, lights flash
+## Subscribe to MQTT topics and update content
+## Publish messages to MQTT
 
 ---
 
-## An mqtt to wordpress bridge
+## An mqtt to WordPress bridge
 
 ---
 
@@ -498,7 +624,7 @@ mqtt-to-wp excerpt
 
 ---
 
-## wordpress to mqtt
+## WordPress to mqtt
 
 ---
 
@@ -535,35 +661,84 @@ way better to be exposed by the rest api.  So that the bridge could start and po
 
 ---
 
-## [fit] 2. How to design things
+# Doing this at home
+## MQTT brokers
+
+---
+
+![fit left original](day-of-rest-assets/host-mosquitto.png)
+![fit right original](day-of-rest-assets/host-mosquitto-demo.png)
+
+---
+
+![fit](day-of-rest-assets/host-emq.png)
+
+---
+
+![fit](day-of-rest-assets/host-aws.png)
+
+^
+The rest of the AWS ecosystem
+Kinesis, stream processing
+Lambda, webhooks would allow you to do this at scale
+
+---
+
+![fit](day-of-rest-assets/host-cloudmqtt.png)
+
+---
+
+![fit](day-of-rest-assets/host-hivemq.png)
+
+---
 
 
-## TODO
+![fit](day-of-rest-assets/host-rabbitmq.png)
 
 
 ---
 
-## [fit] 3. Making use of things
-
-## TODO
-
+# Doing this at home
+## MQTT brokers
 
 ---
 
-## [fit] 4. How to build useful things
+![](day-of-rest-assets/puck.jpg)
 
-## TODO
-
+^
+This is the device that I've used for my two things.
+This is a wonderful device. Small, looks nice.
+BLE only at the moment, though I wrote a BLE to MQTT bridge
 
 ---
 
+## Espurino
 
+![original 50%](day-of-rest-assets/espruino.png)
+
+---
+
+# ESP8266
+
+![original](day-of-rest-assets/ESP8266-ESP-12.jpg)
+
+---
+
+# Pi Zero W
+
+![original](day-of-rest-assets/pi-w-adafruit.jpg)
+
+---
+
+##
+
+---
 
 # ~~~~
 
 
 
-^ Exit - we've now considered wordpress as a "thing".
+^ Exit - we've now considered WordPress as a "thing".
 
 ---
 
@@ -573,7 +748,10 @@ way better to be exposed by the rest api.  So that the bridge could start and po
 
 # [fit] Part 2.
 
-# How we can take inspiration from things?
+# How can we take inspiration from the way we build Things.
+
+
+^ Let's think of some properties of things, and how we can use them to inspire us
 
 ---
 
@@ -582,28 +760,45 @@ way better to be exposed by the rest api.  So that the bridge could start and po
 ---
 
 # A Thing
-<!--# Isn't what it's made from-->
-# [fit] Is more than it's made from
+<!--# Is more than what it's made from-->
+# Is more than the stuff it's made from
+
+^ If you put some stuff together, you've got a new thing. Not just stuff
 
 ---
-<!--
-![](day-of-rest-assets/teapot.jpg)
 
---->
+# ~~A wooden table~~
 
-<!--# [fit] There's more than <br />the implementation-->
-# [fit] The implementation <br/>is only part of it
+# A table
+
+^
+We then refer to it by the thing that we're created
+You don't say "come and sit at the wooden table", you say, come and sit at this table.
+What is important is that there's a table, not what it's made from.
+However, it can take great skill to turn wood into a table, but I'd say that's more to do with craft of a carpenter rather than there being a carpenter in the first place.
+
+---
+
+# [fit] We build applications
+# [fit] from source code
 
 ```php
 print '<b>hello <i>world</B></i>';
 ```
 
+^
+It can be tempting to think of writing code is our job, when actually we're creating the thing that code does.
+And again, it takes great craft to write good code but it's not why we do it.
+
 ---
 
-# [fit] Identifying a goal
+# Working out what you're trying to build
+
+^
+Because we work in digital, it can be particularly hard to define what the thing we're building is; rather than a table say, which is pretty obvious that it exists.
+This is especially difficult in larger teams.
 
 <!---
-
 # [fit] Our job is about
 # [fit] creating stuff
 # [fit] code is out tool for doing that
@@ -613,12 +808,23 @@ print '<b>hello <i>world</B></i>';
 
 <!-- # [UX & Wireframes] -->
 
-
 ![cover](day-of-rest-assets/wireframe.jpg)
 
-
+^
+one tool for this is wireframes & diagrams, which can be really useful for getting an early feel for what we're trying to do.
 
 <!--https://www.flickr.com/photos/benoitmeunier/6384895413 -->
+
+---
+
+![fit](day-of-rest-assets/nophone.png)
+
+^
+I think this can be taken a bit further though. We're stuck thinking that the thing we're building is an app, or website.
+When we might be able to think higher than that.
+This is the nophone, it's a bit of plastic, and it's features are that it can't ring.
+It's really interesting to start from here, and imagine what a user is trying to do.
+
 
 ---
 
@@ -626,20 +832,12 @@ print '<b>hello <i>world</B></i>';
 # We write User Stories
 # Because they help keep us focussed
 
----
-
-![fit](day-of-rest-assets/nophone.png)
-
-
-
-<!---
-
-# [fit] People use things
-# [fit] to do stuff
-
---->
+^
+I'm a huge fan of user stories.
+Writing good ones are hard.
 
 ---
+
 
 # Some questions:
 
@@ -657,15 +855,8 @@ print '<b>hello <i>world</B></i>';
 
 # [fit] 1. What does the thing do? <br/>2. Is it doing it?
 
-^ _This_ is where it could be improved. It's not necessarily about adopting a new standard, or cleaning up code, it's about being purpose driven
-
-
-<!--
----
-
-# Sometimes we fix solutions instead of problems
-
--->
+^
+_This_ is where it could be improved. It's not necessarily about adopting a new standard, or cleaning up code, it's about being purpose driven by the end goal of interaction.
 
 
 ---
@@ -690,7 +881,17 @@ Alternatives:
 
 ---
 
+# Someone needs to understand
+
+^
+When you create a thing, you create a cognitive model for the person using it.
+And this isn't limited to physical things, it can be an idea, or an API or something else.
+
+---
+
 ![](images/compact-cassette.jpg)
+
+^ this object holds music
 
 ---
 
@@ -703,20 +904,38 @@ Alternatives:
 ^ Phillips EL 3302 (this one)
 ^ Phillips EL 3300 - 1963 first ever tape player
 
+^
+Microphones - because premastered tapes were hard to get hold of
+
+
 ---
 
 
 ![](images/walkman.jpg)
 
-^ 79 - 16 years later - Sony introduced the walkman
+^
+79 - 16 years later - tape players looked like this
+Sony introduced the walkman, and it changed the way we experience music
+
+^ this innovation is possible because the tape format was consistent
 
 ---
 
 ![](images/horizons.jpg)
 
+^
+it was also generic enough that years later it could be used to load games.
+zxspectrum - floppy drive cost 1000k, or people could just use their tape
+
 ---
 
 ![](images/tape-adaptor.jpg)
+
+^
+This simplicty also paved the way for the future.
+This is one of my favourite devices, it bridges the gap between two generations of device. Tapes and CDs
+
+
 
 ---
 
@@ -816,27 +1035,184 @@ Alternatives:
 
 ---
 
-# A thing
+# A Thing
 
 ---
 
-# A thing
-
-## Should be a bit magical
-
----
-
-[magic trick]
+# A Thing
+# Can appear easy
+## (even when there's other stuff going on)
 
 ---
 
-# Practice the things you
+![](day-of-rest-assets/magic.jpg)
 
 ---
 
-# Slight of hand
+# Imagine how your thing should work
+## then work back from there
 
 ---
+
+---
+
+# [fit] Part 3.
+<!-- # How we can build things with the web plaftorm -->
+<!--# How the web platform can make our websites into Things.-->
+# How we can make our phones into things
+
+----
+
+# MQTT over WebSockets
+
+```js
+const mqt = new MQT('test.mosquitto.org:8080')
+mqt.subscribe('/sensor/value' (value) =>
+  document.querySelector('#sensor').textContent = value
+)
+
+mqt.publish('/phone/visit', document.location.pathname)
+```
+
+---
+
+The web is a good way to access device capabilities
+
+---
+
+# [fit] Power
+
+```js
+navigator.getBattery()
+  .then(({value, charging}) => {})
+```
+
+---
+
+# [fit] Location
+
+```js
+navigator.geolocation.getCurrentPosition(
+  ({coords}) => {}
+)
+```
+
+---
+
+# [fit] Orientation & movement
+
+```js
+document.addEventListener('deviceorientation',
+  ({alpha, beta, gamma}) => {}
+)
+document.addEventListener('devicemotion',
+  ({acceleration}) => {}
+)
+```
+
+---
+
+# [fit] Ambient Light
+
+```js
+window.addEventListener('devicelight',
+  ({value}) => {}
+)
+```
+
+---
+
+# [fit] Proximity
+
+```js
+window.addEventListener('userproximity',
+  ({near}) => {}
+)
+```
+---
+
+# [fit] Audio/Video feed
+
+```js
+navigator.mediaDevices.getUserMedia({
+  audio: true, video: true
+})
+  .then(stream => {})
+
+```
+
+---
+
+## Making changes to the environment
+
+---
+
+# [fit] Movement
+
+```js
+navigator.vibrate(100)
+```
+
+---
+
+# [fit] Sounds
+
+```js
+var ctx = new AudioContext()
+var osc = ctx.createOscillator()
+osc.connect(ctx.destination)
+osc.frequency.value = 300
+osc.start()
+```
+
+
+---
+
+# Other features
+
+---
+
+# Service workers & progressive web apps
+
+---
+
+# Web Bluetooth
+
+---
+
+# Web Payments?
+
+# WebRTC
+
+# Chrome Cast - Presentation API
+
+# WebVR
+
+# IndexedDB
+
+---
+
+
+
+
+notes:
+
+A thing that:
+* knows where it is in the world
+* knows what direction it's pointing
+* knows how bright it is
+* knows
+
+* sensor data
+  * geolocation
+  *
+* output
+* offline web technologies
+* web bluetooth - connecting to other devices nearby
+* processing power
+
+---
+
 
 # The things we carry around with us
 
