@@ -1,71 +1,55 @@
-theme: Zurich, 2
 
-# Hello
+# [fit] Web Sites
 
----
+# and 
 
-# Thanks
-
----
-
-# I'm Ben
+# [fit] Fairy Lights
 
 ---
 
-![](day-of-rest-assets/card.pdf)
+# [fit] Hi, I'm Ben
+
+## Freelance web developer and other stuff
+
+### Say hi on twitter: @benjaminbenben
 
 ---
 
-![](day-of-rest-assets/card-job.pdf)
+# This is a talk about things
 
 ---
 
-![](day-of-rest-assets/card-job-2.pdf)
+Some things that light up
 
 ---
 
-# Oxford
+Some thing that I can press
+
+---
+
+# This is a talk of 3 parts 
+
+---
+
+# Part 1. 
+# [fit] Connecting Fairy Lights to
+# [fit] **Web Servers**
+
+---
+
+# Part 2.
+# [fit] Connecting Fairy Lights to
+# [fit] **Web Browsers**
+
+---
+
+# Part 3.
+# [fit] What was the point of 
+# [fit] parts 1 & 2? 
 
 ---
 
 
-# Oxford, UK
-
----
-
-![fit](day-of-rest-assets/oxford-uk.png)
-
----
-
-![fit](day-of-rest-assets/oxford-us.png)
-
----
-
-![80%](day-of-rest-assets/jsoxford.png)
-
----
-
-# Meetups
-
----
-
-# Mega Meetups
-
----
-
-# Super Mega Meetups
-
----
-
-![fit](day-of-rest-assets/msmm.png)
-
----
-
-[i feel like these are important - it's really valuable to learn about new perspectives]
-
-[tech communities tend to be in little bubbles - you can gain a lot from getting a new perspective]
-
-[new perspectives are as important]
 
 ---
 
