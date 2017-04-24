@@ -1,7 +1,7 @@
 
 # [fit] Web Sites
 
-# and 
+# and
 
 # [fit] Fairy Lights
 
@@ -9,29 +9,44 @@
 
 # [fit] Hi, I'm Ben
 
-## Freelance web developer and other stuff
+## [fit] Freelance web developer & other stuff
 
 ### Say hi on twitter: @benjaminbenben
 
 ---
 
-# This is a talk about things
+# This is a talk about things:
 
 ---
 
-Some things that light up
+![cover](day-of-rest-assets/lights.jpg)
 
 ---
 
-Some thing that I can press
+# Some things that
+# light up
+
+
+![cover](day-of-rest-assets/lights.jpg)
 
 ---
 
-# This is a talk of 3 parts 
+![cover](day-of-rest-assets/button.jpg)
 
 ---
 
-# Part 1. 
+# A thing you can
+# [fit] press down
+
+![cover](day-of-rest-assets/button.jpg)
+
+---
+
+# This is a talk of 3 parts
+
+---
+
+# Part 1.
 # [fit] Connecting Fairy Lights to
 # [fit] **Web Servers**
 
@@ -44,12 +59,19 @@ Some thing that I can press
 ---
 
 # Part 3.
-# [fit] What was the point of 
-# [fit] parts 1 & 2? 
+# [fit] Is any of this useful?
+
+### **(Spoiler: yes)**
 
 ---
 
 
+
+---
+
+# [fit] PART
+# [fit] ONE
+### Connecting Fairy Lights to **Web Servers**
 
 ---
 
