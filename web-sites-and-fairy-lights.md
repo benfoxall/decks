@@ -13,6 +13,9 @@
 
 ### Say hi on twitter: @benjaminbenben
 
+^
+I'd usually say more things, but I don't have time today
+
 ---
 
 # This is a talk about things:
@@ -42,26 +45,43 @@
 
 ---
 
-# This is a talk of 3 parts
+# These are:
+
+* wireless
+* battery powered
+
+---
+
+# This is a talk of 4 parts
 
 ---
 
 # Part 1.
-# [fit] Connecting Fairy Lights to
-# [fit] **Web Servers**
+# [fit] Connecting **this Button** to these
+# [fit] **Fairy Lights**
 
 ---
 
+
 # Part 2.
-# [fit] Connecting Fairy Lights to
-# [fit] **Web Browsers**
+# [fit] Connecting these Fairy Lights to a
+# [fit] **Web Server**
 
 ---
 
 # Part 3.
-# [fit] Is any of this useful?
+# [fit] Connecting these Fairy Lights to a
+# [fit] **Web Browsers**
 
-### **(Spoiler: yes)**
+---
+
+# Part 4.
+# [fit] Is there anything
+# [fit] **useful**
+# [fit] about this?
+
+^
+There's a chance I won't have time to say this
 
 ---
 
@@ -71,125 +91,27 @@
 
 # [fit] PART
 # [fit] ONE
-### Connecting Fairy Lights to **Web Servers**
-
----
-
-# [fit] HTTP
-
----
-
-# [fit] HTTP
-
-## [fit] …isn't all that great
-
----
-
-# [fit] HTTP
-
-## [fit] …isn't all that great
-
-### (sometimes)
-
----
-
-# Reason 1.
-# HTTP was designed for wires
-
-^ HTTP assumes a good network
-
-<!--
-The idea of requesting a resource, then having to make subsequent RT to populate more information isn't a problem with our sites, it's a problem with our low level api.
-GraphQL and h2 are ways of getting round this
--->
-
----
-
-# Reason 2.
-# HTTP resources need constant uptime
-### even embedded & compute-constrained resources
-<!--# HTTP wasn't designed for constrained devices
-# Resources have the compute power-->
-
-^ something that it only on for an hour a day, or maybe even a second a day
-
-^ perhaps a good example, if we've got two resources
-
----
-
-# ~
-
----
-
-# What I'm going to talk about today:
-
----
-
-# What I'm going to talk about today:
-
-# [fit] Things
-
----
-
-## [fit] _The Internet of Things_
-
-## [fit] 1. Connecting things together
-## [fit] 2. How to design things
-## [fit] 3. Making use of things
-## [fit] 4. How to build useful things
-
----
-
-# ~
-
----
-
-# 1
-# [fit] Connecting things
-# [fit] together
-
----
-
-# Some example things
-
----
-
-<!-- photo note, auto balance, transfer filter -->
-
-![cover](day-of-rest-assets/button.jpg)
-
----
-
-![cover](day-of-rest-assets/button.jpg)
-
-# 1. a thing you can
-# [fit] press down
-
----
-
-![cover](day-of-rest-assets/lights.jpg)
-
----
-
-![cover](day-of-rest-assets/lights.jpg)
-
-# 2. some things that
-# [fit] light up
+### Connecting this **Button** to these **Fairy Lights**
 
 ---
 
 # target outcome:
 
-# When I press this thing, these things should turn red
+# When I press this thing,
+# these things should turn red
 
 ---
 
-<!-- curl 'https://benjaminbenben.com/led-strip' -H 'content-type: application/json' -H 'Accept: */*' -H 'Cache-Control: no-cache' --data-binary '{"color":"red"}'  -v -->
+[button] [magical iot network] [fairy lights]
 
-Sending a post request to our LED strip?
+---
 
-```
-POST /led-strip HTTP/1.1
+# [fit] HTTP?
+
+---
+
+```http
+POST /fairy-lights HTTP/1.1
 Host: benjaminbenben.com
 User-Agent: curl/7.51.0
 content-type: application/json
@@ -200,42 +122,49 @@ Content-Length: 15
 {"color":"red"}
 ```
 
-<!-- content-type is the wrong capitalisation, edge case there -->
-
 ---
+
 
 # Handling HTTP
 
 * Opening ports
-* Responding to requests
 * Parsing request & headers
-* Understanding
-* Chunked encoding
+* Responding to requests
+* Handling http codes & response headers
 * Persistent connections
 * IP address changes
 
+<!-- * push/broadcast challenges -->
+
+<!--
+https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+-->
+
 ---
 
-# JSON is pretty challenging too
+# (JSON is pretty challenging too)
 
 ![inline](day-of-rest-assets/parse-json.png)
 
----
-
-# Small devices
-
-* sketchy/variable network
-* low processing power
-* power consumption requirements
 
 ---
 
-<!--# [fit] HTTP / JSON / REST-->
+<!-- MAYBE ADD - 3 ways HTTP sucks -->
 
-# [fit] We're going to need
-# [fit] a smaller boat
+# HTTP wasn't designed for IoT
 
-![inline 100%](day-of-rest-assets/smaller-boat.gif)
+^
+* HTTP was designed for wires
+* A resource requires permanent presence
+* Impossible to have a response without a request
+
+----
+
+# [fit] ~~HTTP~~
+
+^
+So, we're not going to use http. What should we use instead? Any ideas?
 
 ---
 
@@ -253,18 +182,26 @@ Content-Length: 15
 
 ## Telemetry Transport
 
----
-
-* 1999 (with wireless in mind)
-* lightweight
-* publish subscribe topics
-* message redelivery
+^ The word Telemetry means to get information from somewhere and receive it somewhere else
 
 ---
 
 ![cover](day-of-rest-assets/sat.jpg)
 
+^
+MQTT was built with a use case in mind
+Sensors on an oil pipeline wanting to transmit data through a satellite uplink
+Satellites orbit the earth, so they might come in and out of contact and that's completely expected.
+
 ---
+
+![fit](day-of-rest-assets/broker.pdf)
+
+---
+
+### publish subscribe
+### topics
+### messages
 
 ![fit](day-of-rest-assets/broker.pdf)
 
@@ -273,422 +210,422 @@ Content-Length: 15
 # MQTT Broker
 
 * Could be a satellite
-* Could be a hub in a smart home
+* Could be a hub in a home
 * Could be a box sitting in a field
 
----
-
-## nope
-# [fit] ~~REST~~
-# [fit] ~~HTTP~~*
-
----
-
-(MQTT over WebSockets)
+^
+A broker could be many things:
+A satellite
+A central hub in a smart home
+Sitting in a field
 
 ---
 
-# [fit] Publishing Messages
+# MQTT Client
 
-## eg. on button press
-
-# publish '__/btn__' '__press__'
-
----
-
-![80%](day-of-rest-assets/packet-fixed-header.pdf)
+* Could be a phone
+* Could be a button
+* Could be some fairy lights
 
 ---
 
-![80%](day-of-rest-assets/packet-topic.pdf)
+# MQTT Connection
+
+* Stateful
+* Message based
+* Binary
+
+^ you've got a persistent connection and you're sending binary messages back and forth along it.
 
 ---
 
-![80%](day-of-rest-assets/packet-payload.pdf)
+# Message Types
+
+## CONNECT, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL, PUBCOMP, SUBSCRIBE, SUBACK, UNSUBSCRIBE, UNSUBACK, PINGREQ, PINGRESP & DISCONNECT
 
 ---
 
-![80%](day-of-rest-assets/packet-example.pdf)
+# Example (publishing messages)
+
+```
+> CONNECT
+< CONNACK
+> PUBLISH /fairy-lights/12 red
+```
+
 
 ---
 
-```php
-fwrite($this->socket,  $message)
+# Example  (subscribing messages)
+
+```
+> CONNECT
+< CONNACK
+> SUBSCRIBE /fairy-lights/+
+…
+…
+< PUBLISH /fairy-lights/12 red
+…
+…
+< PUBLISH /fairy-lights/15 blue
+…
 ```
 
 ---
 
-```
-⨽⨽⨽⨽/btnpress
-```
+# Features
 
-# vs
+### (vs HTTP)
 
-```
-POST /btn HTTP/1.1
-Host: benjaminbenben.com
-User-Agent: curl/7.51.0
-content-type: application/json
-Accept: */*
-Cache-Control: no-cache
-Content-Length: 15
-
-{"state":"pressed"}
-```
+* lightweight protocol
+* configurable QoS
 
 ---
 
-# 13 bytes
+# QoS
 
-# [fit] POST /btn HTT
+* 0
+* 1
+* 2
 
----
-
-# [fit] Receiving Messages
-
-## eg. some lights
-
-# Subscribe '**/led/color**'
-
----
-
-![80%](day-of-rest-assets/packet-fixed-header-message-type.pdf)
-
----
-
-## Subscribing to a topic
-
-1. Set the message type to 1000 (subscribe)
-2. Set payload to '/led/color'
-
-<!--
-
-## Message Types
-
-```
-1  CONNECT      Client request to connect to Server
-2  CONNACK      Connect Acknowledgment
-3  PUBLISH      Publish message
-4  PUBACK       Publish Acknowledgment
-5  PUBREC       Publish Received (assured delivery part 1)
-6  PUBREL       Publish Release (assured delivery part 2)
-7  PUBCOMP      Publish Complete (assured delivery part 3)
-8  SUBSCRIBE    Client Subscribe request
-9  SUBACK       Subscribe Acknowledgment
-10 UNSUBSCRIBE  Client Unsubscribe request
-11 UNSUBACK     Unsubscribe Acknowledgment
-12 PINGREQ      PING Request
-13 PINGRESP     PING Response
-14 DISCONNECT   Client is Disconnecting
-```
-
--->
-
----
-
-
-
-
-## MQTT feature:
-
-# [fit] QoS
-
-## For when you're not sure if your satellite is even there
-
-^ This is a feature that makes mqtt very different from http requests
-
----
-
-![80%](day-of-rest-assets/packet-fixed-header-qos.pdf)
-
----
-
-# QoS 0
-## Fire and Forget
-
-![inline](day-of-rest-assets/qos-temp.jpg)
-
----
-
-# QoS 1
-## "At most once delivery"
-## Delivery confirmation
-
-![inline](day-of-rest-assets/qos-temp.jpg)
-
----
-
-# QoS 2
-## "Exactly once delivery"
-## Client receive confirmation
-
-![inline](day-of-rest-assets/qos-temp.jpg)
-
----
-
-## Resilient to flakey networks
-## Retries embraced/expected
+^
+HTTP is just passed 1 (you get confirmation, with payload)
 
 ---
 
 # [fit] MQTT
 ## …that's about it
 
-### (connect, receipt messages, last will, persistence)
+---
 
-^ you sould prob
+# [fit] MQTT
+## …that's about it
+
+### (though also; security/encryption, client IDs, last will, persistence, ping/pong)
 
 ---
 
 # Demo
 
----
-
-# Connecting to wordpress things
-
----
-
-## MQTT to REST bridge
-
----
-
-## Webhook to MQTT
-
-# ~
-
----
-
-## [fit] 2. How to design things
-
-
-## TODO
-
-
----
-
-## [fit] 3. Making use of things
-
-## TODO
-
-
----
-
-## [fit] 4. How to build useful things
-
-## TODO
-
+## Let's hook the button and lights together
 
 ---
 
 
-
-# ~~~~
-
-
-
-^ Exit - we've now considered wordpress as a "thing".
-
 ---
 
-# [fit] Thinking about things
+# ✨
+
+## We've connected a couple of
+## things together
 
 ---
-
-# A Thing
-# Isn't what it's made from
 
 
 ---
 
-# [fit] It's tempting to think that
-## [fit] our job is about writing code
+# [fit] PART
+# [fit] TWO
+### Connecting Fairy Lights to a **Web Server**
 
-```php
-print '<b>hello <i>world</B></i>';
+---
+
+# target outcome:
+
+# When I post to my blog, <br/>these things change colour
+
+---
+
+![](day-of-rest-assets/wp.png)
+
+
+---
+
+# For WordPress to be a **thing**:
+
+## 1/ Subscribe to topics
+## 2/ Publish messages
+
+---
+
+# 1/ Subscribe to topics
+
+---
+
+# 1/ Subscribe to topics
+
+# Create an mqtt-wp bridge
+
+### (A script that forwards on messages)
+
+### [github/benfoxall/mqtt-wp](https://github.com/benfoxall/mqtt-wp)
+
+---
+
+```js
+const WPAPI = require('wpapi')
+
+const wp = new WPAPI(config.wp)
+
+const update = (slug, content) =>
+  wp.pages().slug(slug)
+    .update({content})
+
+// update('my-thing', 'Sensor value: 4')
 ```
 
-<!---
+---
 
-# [fit] Our job is about
-# [fit] creating stuff
-# [fit] code is out tool for doing that
--->
+```js
+const mqtt = require('mqtt')
+
+const client = mqtt.connect(config.mqtt_host)
+
+client.subscribe('my/sensor')
+
+client.on('message', (topic, buffer) => {
+  const content = escape(buffer.toString())
+  update('my-sensor', content)
+})
+
+```
 
 ---
 
-<!-- # [UX & Wireframes] -->
-
-
-![cover](day-of-rest-assets/wireframe.jpg)
-
-
-
-<!--https://www.flickr.com/photos/benoitmeunier/6384895413 -->
+# 2/ Publish messages
 
 ---
 
-![fit](day-of-rest-assets/nophone.png)
+# 2/ Publish messages
+
+# WP-MQTT
 
 ---
 
-# [fit] People use things
-# [fit] to do stuff
+## WP-MQTT settings
+
+![fit original](day-of-rest-assets/wp-mqtt-1.png)
+
+![fit original](day-of-rest-assets/wp-mqtt-2.png)
 
 ---
 
-# Question time:
-## 1. What does your thing do?
+![](day-of-rest-assets/wp-mqtt.pdf)
+
 
 ---
 
-# Question time:
-## 1. What does your thing do?
-## 2. Could it be doing that better?
+# Demo
 
-^ _This_ is where it could be improved. It's not necessarily about adopting a new standard, or cleaning up code, it's about being purpose driven
+## Let's bring WordPress onto our MQTT network
 
 ---
 
-# Sometimes we fix solutions instead of problems
+---
+
+# ✨
+## We've made WordPress
+## into a thing
+
+^ we've had this thing that lights up, and a thing that you press down, now we've got this thing that stores content
 
 ---
 
-# A Thing
-# Is a point of interaction
+---
+
+# [fit] PART
+# [fit] THREE
+### Connecting Fairy Lights to a **Web Browser**
+
+---
+
+# target outcome:
+
+# When I visit a web page, <br/>I can choose the colour of my lights
+
+---
+
+
+![fit](day-of-rest-assets/website.png)
+
+---
+
+# The easy way
+
+## Post message to your **web server**…
 
 <!--
-Alternatives:
- * Is a concept
- * Has a cognitive model
- * Is a model
- * creates an interface
- * Is an interface
- * Is a cognitive interface
- * Is a point of interaction
--->
-
 ---
 
-![](images/compact-cassette.jpg)
-
----
-
-![](images/tapes.jpg)
-
----
-
-![](images/el3302.jpg)
-
-^ Phillips EL 3302 (this one)
-^ Phillips EL 3300 - 1963 first ever tape player
-
----
-
-
-![](images/walkman.jpg)
-
-^ 79 - 16 years later - Sony introduced the walkman
-
----
-
-![](images/horizons.jpg)
-
----
-
-![](images/tape-adaptor.jpg)
-
----
-
-# A Thing
-
-# Doesn't have to be simple
+# [fit] how do we know which
+# [fit] **fairy lights**
+# [fit] **are ours**? -->
 
 
 ---
 
-![](day-of-rest-assets/blackbird-cockpit.png)
+# [fit] These lights are
+# [fit] **right here**!
+## [fit] why control them
+## [fit] from your web server?
 
-^ This is the cockpit of an SR-71, more commonly known as
-
----
-
-![](day-of-rest-assets/blackbird.jpg)
-
-^ …the blackbird
-
----
-
-# [fit] The SR-71 avoided threats using
-
-## [fit] 1/ altitude
-## [fit] 2/ speed
+^
+Jam Factory hack day
+1. music stops
+2. tills break
 
 ---
 
-# 80,000 feet
+<!--
+# [fit] And, we might not want
+# [fit] **every person on**
+# [fit] **the internet**
+## [fit] to have access
+## [fit] to our lights
 
-![original](day-of-rest-assets/blackbird-83k.jpg)
-
----
-
-![](day-of-rest-assets/blackbird-pilots.jpg)
-
-<!-- http://www.salimbeti.com/aviation/images/equip/sr71pilots70s.jpg-->
-
----
-
-# Mach 3+
+--- -->
 
 
-![original](day-of-rest-assets/blackbird-sta.jpg)
-
+![](day-of-rest-assets/puck.jpg)
 
 ---
 
-# "A thing that flies
+![40%](day-of-rest-assets/512px-Bluetooth.svg.png)
 
-# [fit] very high &
-# [fit] very fast"
+---
+
+# Web Bluetooth
+
+```js
+navigator.bluetooth.requestDevice({
+  filters: [{namePrefix: 'Puck'}],
+  optionalServices: [0xBCDE]
+})
+```
+
+---
+
+![](day-of-rest-assets/website-request.png)
+
+---
+
+```js
+navigator.bluetooth.requestDevice({
+  filters: [{namePrefix: 'Puck'}],
+  optionalServices: [0xBCDE]
+})
+.then(device => device.gatt.connect())
+.then(server => server.getPrimaryService(0xBCDE))
+.then(service => service.getCharacteristic(0xABCD))
+.then(fairyLights => {
+
+  fairyLights.writeValue(Uint8ClampedArray.from([255,150,0]).buffer)
+
+})
+```
+
+---
+
+# Demo
+
+## Change the colour of the lights with [this webpage](https://benjaminbenben.com/lights/)
+
+---
+
+---
+
+## Bonus point #1
+
+# [fit] Discovery
+
+---
+
+![](day-of-rest-assets/physical-web.png)
+
+---
+
+```js
+require("ble_eddystone")
+  .advertise("goo.gl/IaXNnT")
+```
+
+---
+
+![40%](day-of-rest-assets/Screenshot_20170425-230601.png)
 
 ---
 
 
+## Bonus point #2
+
+# [fit] Offline Access
 
 
+---
 
+## Service workers
+
+![fit original](day-of-rest-assets/the-offline-cookbook.png)
+
+---
+
+![fit](day-of-rest-assets/Screen Shot 2017-04-26 at 01.23.26.png)
+
+---
+
+## Bonus point #3
+
+# [fit] Application Manifest
+
+---
+
+![fit](/Users/ben/Desktop/manifest.png)
+
+---
+
+![left fit](day-of-rest-assets/Screenshot_20170426-012615.png)
+
+![right fit](day-of-rest-assets/Screenshot_20170419-190832.png)
 
 
 ---
 
 
-> For more information, watch __Skunk Works__ by __Nickolas Means__
+![50%](day-of-rest-assets/Screenshot_20170426-010206.png)
 
 
 ---
 
-
-
-# ~
+![60%](day-of-rest-assets/localhost-8080-\(Nexus 6P\).png)
 
 ---
 
-> INTRO TO NEXT SECTION
-> [PHOTO OF PHONE]
-> HOW DO WE THINK OF THIS AS A THING
+# ✨
+## We've made a website
+## into a thing
 
+^
+we've had the things we press and the things that light up, now we've got this thing in our hand that lets us control those things over there
 
+---
 
+---
 
+# [fit] PART
+# [fit] FOUR
 
+### Is there anything **useful** about this?
 
+---
 
-----
+# [fit] We build **things**
 
+## But we sometimes forget
 
-Photos:
+---
 
-* By USAF / Judson Brohmer - Armstrong Photo Gallery: Home - info - pic, Public Domain, https://commons.wikimedia.org/w/index.php?curid=30816
-* By National Museum of the USAF, imagery by Lyle Jansma, Aerocapture Images - National Museum of the USAF website - linked on Cockpit360 images page (archived 2016-12-12), Public Domain, https://commons.wikimedia.org/w/index.php?curid=54004278
-* By USAF/Brian Shul - Shul, Brian (1994). The Untouchables. Mach One. pp. 113–114. ISBN 0929823125., Public Domain, https://commons.wikimedia.org/w/index.php?curid=25099554
+---
 
-* By Frontier India Defense and Strategic News Service - http://album.frontierindia.net/main.php?g2_itemId=112, CC BY-SA 2.5 in, https://commons.wikimedia.org/w/index.php?curid=3492838
+# [fit] Thank you <br/>for listening
+
+## @benjaminbenben
