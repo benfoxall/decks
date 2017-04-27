@@ -47,8 +47,12 @@ I'd usually say more things, but I don't have time today
 
 # These are:
 
-* wireless
+* wireless (bluetooth)
 * battery powered
+* puck.js
+
+^
+espruino
 
 ---
 
@@ -74,7 +78,7 @@ I'd usually say more things, but I don't have time today
 # [fit] **Web Browsers**
 
 ---
-
+<!--
 # Part 4.
 # [fit] Is there anything
 # [fit] **useful**
@@ -83,7 +87,7 @@ I'd usually say more things, but I don't have time today
 ^
 There's a chance I won't have time to say this
 
----
+--- -->
 
 
 
@@ -100,9 +104,13 @@ There's a chance I won't have time to say this
 # When I press this thing,
 # these things should turn red
 
+^
+Extra option - the button could be in a totally different place
+
 ---
 
-[button] [magical iot network] [fairy lights]
+# [fit] Fairy         ⇽🦄🌈☀️🍀⭐️⚡️✨➤        Button
+# Lights
 
 ---
 
@@ -111,8 +119,8 @@ There's a chance I won't have time to say this
 ---
 
 ```http
-POST /fairy-lights HTTP/1.1
-Host: benjaminbenben.com
+POST /colour HTTP/1.1
+Host: fairy-lights.my-house.co.uk
 User-Agent: curl/7.51.0
 content-type: application/json
 Accept: */*
@@ -156,8 +164,8 @@ https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 
 ^
 * HTTP was designed for wires
-* A resource requires permanent presence
-* Impossible to have a response without a request
+<!-- * A resource requires permanent presence
+* Impossible to have a response without a request -->
 
 ----
 
@@ -199,13 +207,13 @@ Satellites orbit the earth, so they might come in and out of contact and that's 
 
 ---
 
-### publish subscribe
+<!-- ### publish subscribe -->
 ### topics
 ### messages
 
 ![fit](day-of-rest-assets/broker.pdf)
 
----
+<!-- ---
 
 # MQTT Broker
 
@@ -225,11 +233,11 @@ Sitting in a field
 
 * Could be a phone
 * Could be a button
-* Could be some fairy lights
+* Could be some fairy lights -->
 
 ---
 
-# MQTT Connection
+# Connection
 
 * Stateful
 * Message based
@@ -237,15 +245,15 @@ Sitting in a field
 
 ^ you've got a persistent connection and you're sending binary messages back and forth along it.
 
----
+<!-- ---
 
 # Message Types
 
-## CONNECT, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL, PUBCOMP, SUBSCRIBE, SUBACK, UNSUBSCRIBE, UNSUBACK, PINGREQ, PINGRESP & DISCONNECT
+## CONNECT, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL, PUBCOMP, SUBSCRIBE, SUBACK, UNSUBSCRIBE, UNSUBACK, PINGREQ, PINGRESP & DISCONNECT -->
 
 ---
 
-# Example (publishing messages)
+# Publishing Messages
 
 ```
 > CONNECT
@@ -256,7 +264,7 @@ Sitting in a field
 
 ---
 
-# Example  (subscribing messages)
+# Subscribing to topics
 
 ```
 > CONNECT
@@ -278,8 +286,10 @@ Sitting in a field
 ### (vs HTTP)
 
 * lightweight protocol
-* configurable QoS
+* QoS
 
+
+<!--
 ---
 
 # QoS
@@ -290,6 +300,7 @@ Sitting in a field
 
 ^
 HTTP is just passed 1 (you get confirmation, with payload)
+ -->
 
 ---
 
@@ -301,7 +312,7 @@ HTTP is just passed 1 (you get confirmation, with payload)
 # [fit] MQTT
 ## …that's about it
 
-### (though also; security/encryption, client IDs, last will, persistence, ping/pong)
+### (though also; security/encryption, client IDs, last will, persistence, ping/pong) -->
 
 ---
 
@@ -343,60 +354,16 @@ HTTP is just passed 1 (you get confirmation, with payload)
 
 # For WordPress to be a **thing**:
 
-## 1/ Subscribe to topics
-## 2/ Publish messages
+## 1/ Publish messages
+## 2/ Subscribe to topics
 
 ---
 
-# 1/ Subscribe to topics
+# 1/ Publish messages
 
 ---
 
-# 1/ Subscribe to topics
-
-# Create an mqtt-wp bridge
-
-### (A script that forwards on messages)
-
-### [github/benfoxall/mqtt-wp](https://github.com/benfoxall/mqtt-wp)
-
----
-
-```js
-const WPAPI = require('wpapi')
-
-const wp = new WPAPI(config.wp)
-
-const update = (slug, content) =>
-  wp.pages().slug(slug)
-    .update({content})
-
-// update('my-thing', 'Sensor value: 4')
-```
-
----
-
-```js
-const mqtt = require('mqtt')
-
-const client = mqtt.connect(config.mqtt_host)
-
-client.subscribe('my/sensor')
-
-client.on('message', (topic, buffer) => {
-  const content = escape(buffer.toString())
-  update('my-sensor', content)
-})
-
-```
-
----
-
-# 2/ Publish messages
-
----
-
-# 2/ Publish messages
+# 1/ Publish messages
 
 # WP-MQTT
 
@@ -410,14 +377,63 @@ client.on('message', (topic, buffer) => {
 
 ---
 
-![](day-of-rest-assets/wp-mqtt.pdf)
+
+# 2/ Subscribe to topics
+
+---
+
+# 2/ Subscribe to topics
+
+# MQTT-WP
+
+### listen for messages then forward
+### them on to the WP-REST API
+
+#### [github/benfoxall/mqtt-wp](https://github.com/benfoxall/mqtt-wp)
+
+^
+This is a tiny little script that runs in node
+
+---
+
+```js
+const mqtt = require('mqtt')
+
+const client = mqtt.connect(config.mqtt_host)
+
+client.subscribe('my/sensor')
+
+client.on('message', (topic, buffer) => {
+  const content = escape(buffer.toString())
+  updatePage('my-sensor', content)
+})
+
+```
+
+---
+
+```js
+const WPAPI = require('wpapi')
+
+const wp = new WPAPI(config.wp)
+
+const updatePage = (slug, content) =>
+  wp.pages().slug(slug)
+    .update({content})
+
+```
+
 
 
 ---
 
+<!-- ![](day-of-rest-assets/wp-mqtt.pdf)
+
+--- -->
+
 # Demo
 
-## Let's bring WordPress onto our MQTT network
+## Let's get WordPress on our MQTT network
 
 ---
 
@@ -494,6 +510,15 @@ Jam Factory hack day
 
 ---
 
+# - Advertising
+# - Connecting
+# - Services
+# - Characteristics
+
+![40%](day-of-rest-assets/512px-Bluetooth.svg.png)
+
+---
+
 # Web Bluetooth
 
 ```js
@@ -534,9 +559,23 @@ navigator.bluetooth.requestDevice({
 
 ---
 
+# We can do even better
+
+---
+
 ## Bonus point #1
 
 # [fit] Discovery
+
+^
+When I walk up to these lights, I want to just interact with them.
+
+---
+
+![40%](day-of-rest-assets/512px-Bluetooth.svg.png)
+
+^
+What if we advertised a url with bluetooth, when we get close - it displays on our screen, so we can just visit it.
 
 ---
 
@@ -556,9 +595,11 @@ require("ble_eddystone")
 ---
 
 
+---
+
 ## Bonus point #2
 
-# [fit] Offline Access
+# [fit] Offline Support
 
 
 ---
@@ -573,13 +614,47 @@ require("ble_eddystone")
 
 ---
 
+---
+
 ## Bonus point #3
 
-# [fit] Application Manifest
+# [fit] Making it feel less like a website
+
+^
+We're not reading content here
 
 ---
 
-![fit](/Users/ben/Desktop/manifest.png)
+```html
+<link rel="manifest" href="/manifest.json">
+```
+
+---
+
+```json
+{
+  "short_name": "Lights",
+  "name": "Fairy Lights",
+  "icons": [
+    {
+      "src": "icons/48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    ...
+    {
+      "src": "icons/512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "https://benjaminbenben.com/lights/?homescreen",
+  "background_color": "#333",
+  "theme_color": "#000",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}
+```
 
 ---
 
@@ -611,18 +686,29 @@ we've had the things we press and the things that light up, now we've got this t
 
 ---
 
-# [fit] PART
-# [fit] FOUR
-
-### Is there anything **useful** about this?
+# Some advice to wrap up
 
 ---
 
-# [fit] We build **things**
-
-## But we sometimes forget
+# What's best device to prototype all this edge web technology?
 
 ---
+
+![fit](day-of-rest-assets/nophone.png)
+
+---
+
+# [fit] **Focus on people**
+# [fit] then work back
+# [fit] back from there
+
+^
+The browser
+
+---
+
+# [fit] And build some
+# [fit] things
 
 ---
 
