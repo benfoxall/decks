@@ -18,7 +18,29 @@ I'd usually say more things, but I don't have time today
 
 ---
 
-# This is a talk about things:
+# Couple of pitches
+
+---
+
+### Pitch 1.
+
+# I help run JSOxford
+## Next Wednesday
+### You should come
+
+![](day-of-rest-assets/jsoxford.png)
+
+---
+
+### Pitch 2.
+
+# I can type you stuff for money
+
+![](day-of-rest-assets/card.pdf)
+
+---
+
+# I've got some things with me
 
 ---
 
@@ -27,10 +49,21 @@ I'd usually say more things, but I don't have time today
 ---
 
 # Some things that
-# light up
+# [fit] light up
+
+^
+Actual:
+* Addressable LEDs
+* Puck.js
+* Battery
 
 
 ![cover](day-of-rest-assets/lights.jpg)
+
+^
+Actual:
+* Puck.js
+* Button
 
 ---
 
@@ -39,57 +72,37 @@ I'd usually say more things, but I don't have time today
 ---
 
 # A thing you can
-# [fit] press down
+# [fit] push down
 
 ![cover](day-of-rest-assets/button.jpg)
 
 ---
 
-# These are:
-
-* wireless (bluetooth)
-* battery powered
-* puck.js
-
-^
-espruino
+![](day-of-rest-assets/wp.png)
 
 ---
 
-# This is a talk of 4 parts
+# A thing that
+# [fit] gathers
+# [fit] content
+
+![](day-of-rest-assets/wp.png)
 
 ---
 
-# Part 1.
-# [fit] Connecting **this Button** to these
-# [fit] **Fairy Lights**
+![fit](day-of-rest-assets/browser.png)
 
 ---
 
+# A thing that
+# [fit] let's you
+# [fit] browse stuff
 
-# Part 2.
-# [fit] Connecting these Fairy Lights to a
-# [fit] **Web Server**
-
----
-
-# Part 3.
-# [fit] Connecting these Fairy Lights to a
-# [fit] **Web Browsers**
+![fit](day-of-rest-assets/browser.png)
 
 ---
-<!--
-# Part 4.
-# [fit] Is there anything
-# [fit] **useful**
-# [fit] about this?
 
-^
-There's a chance I won't have time to say this
-
---- -->
-
-
+# Let's connect these together
 
 ---
 
@@ -160,7 +173,7 @@ https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 
 <!-- MAYBE ADD - 3 ways HTTP sucks -->
 
-# HTTP wasn't designed for IoT
+# HTTP was designed for a reliable network
 
 ^
 * HTTP was designed for wires
@@ -281,7 +294,7 @@ Sitting in a field
 
 ---
 
-# Features
+# Cool Features
 
 ### (vs HTTP)
 
@@ -312,7 +325,7 @@ HTTP is just passed 1 (you get confirmation, with payload)
 # [fit] MQTT
 ## …that's about it
 
-### (though also; security/encryption, client IDs, last will, persistence, ping/pong) -->
+### (though also; authentication, certificates, client IDs, last will, persistence, ping/pong)
 
 ---
 
@@ -690,7 +703,7 @@ we've had the things we press and the things that light up, now we've got this t
 
 ---
 
-# What's best device to prototype all this edge web technology?
+# What's best device for prototyping these cutting edge browser experiences?
 
 ---
 
@@ -705,10 +718,10 @@ we've had the things we press and the things that light up, now we've got this t
 ^
 The browser
 
----
+<!-- ---
 
 # [fit] And build some
-# [fit] things
+# [fit] things -->
 
 ---
 

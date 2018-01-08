@@ -4,6 +4,22 @@ theme: Zurich, 2
 
 ---
 
+# Who's used
+
+# [fit] The WP-REST API
+
+---
+
+# Let's assume you're __really__ into
+
+# [fit] The WP-REST API
+
+---
+
+![fit](day-of-rest-assets/last-ador.png)
+
+---
+
 # I'm Ben
 
 ---
@@ -289,12 +305,9 @@ Satellites orbit the earth, so they might come in and out of contact and that's 
 
 ---
 
-* publish subscribe
-* topics
-* wildcards
-* messages
-
-[todo]
+### publish subscribe
+### topics
+### messages
 
 ![fit](day-of-rest-assets/broker.pdf)
 
@@ -629,8 +642,7 @@ fwrite($socket, $publish, strlen($connect));
 
 ---
 
-## Resilient to flakey networks
-## Retries embraced/expected
+## Embraces flakey networks
 
 ---
 
@@ -643,6 +655,12 @@ fwrite($socket, $publish, strlen($connect));
 
 # Demo
 
+## Let's hook these lights together
+
+---
+
+# /Demo
+
 ---
 
 ## Bringing WordPress onto the network
@@ -653,6 +671,8 @@ fwrite($socket, $publish, strlen($connect));
 ## 2/ Publish messages to MQTT
 
 ---
+
+## 1/ Subscribe to MQTT topics
 
 # Create an mqtt-wp bridge
 
@@ -726,21 +746,30 @@ Via Webhooks
 
 # Demo
 
----
-
-## MQTT to WP-REST
+## Let's bring WordPress on to the network
 
 ---
 
-# Demo
+# ~
 
 ---
 
-# Keeping things in sync
+# More useful things with this
+
+* Displaying sensor content
+  * weather sensors
+  * door opening counters
+  * whatever you can build
 
 ---
 
-## Webhook to MQTT
+# More useful things with this
+
+* A device registry
+  * Smart home
+  * Sensors in the field
+
+---
 
 # ~
 
@@ -770,16 +799,7 @@ Lambda, webhooks would allow you to do this at scale
 ---
 
 ![fit](day-of-rest-assets/host-cloudmqtt.png)
-
----
-
 ![fit](day-of-rest-assets/host-hivemq.png)
-
----
-
-
-![fit](day-of-rest-assets/host-rabbitmq.png)
-
 
 ---
 
@@ -800,18 +820,6 @@ BLE only at the moment, though I wrote a BLE to MQTT bridge
 ## Espruino
 
 ![original 30%](day-of-rest-assets/espruino.png)
-
----
-
-# BBC Micro Bit
-
-![original](day-of-rest-assets/bbc-microbit.jpg)
-
-^
-in 2015 every 11 year old in the UK got one
-1 million devices
-Able to buy online too
-
 
 ---
 
@@ -914,39 +922,9 @@ When we might be able to think higher than that.
 This is the nophone, it's a bit of plastic, and it's features are that it can't ring.
 It's really interesting to start from here, and imagine what a user is trying to do.
 
-
 ---
 
-# As a Team
-# We write User Stories
-# Because they help keep us focussed
-
-^
-I'm a huge fan of user stories.
-Writing good ones are hard.
-
----
-
-
-# Some questions:
-
-## (think of a thing you've built)
-
----
-
-# Some questions:
-
-# [fit] 1. What does the thing do?
-
----
-
-# Some questions:
-
-# [fit] 1. What does the thing do? <br/>2. Is it doing it?
-
-^
-_This_ is where it could be improved. It's not necessarily about adopting a new standard, or cleaning up code, it's about being purpose driven by the end goal of interaction.
-
+# Try and work out what your thing does
 
 ---
 
@@ -1124,25 +1102,6 @@ This is one of my favourite devices, it bridges the gap between two generations 
 
 ---
 
-# A Thing
-
----
-
-# A Thing
-# Can appear easy
-## (even when there's other stuff going on)
-
----
-
-![](day-of-rest-assets/magic.jpg)
-
----
-
-# Imagine how your thing should work
-## then work back from there
-
----
-
 ---
 
 # [fit] Part 3.
@@ -1153,6 +1112,8 @@ This is one of my favourite devices, it bridges the gap between two generations 
 ----
 
 # MQTT over WebSockets
+
+# Our device becomes another thing on the network
 
 ```js
 const mqt = new MQT('test.mosquitto.org:8080')
@@ -1165,7 +1126,11 @@ mqt.publish('/phone/visit', document.location.pathname)
 
 ---
 
-The web is a good way to access device capabilities
+# [fit] bit.ly/ADORB
+
+---
+
+# Browsers can do more than displaying documents
 
 ---
 
@@ -1232,10 +1197,6 @@ navigator.mediaDevices.getUserMedia({
 
 ---
 
-## Making changes to the environment
-
----
-
 # [fit] Movement
 
 ```js
@@ -1261,10 +1222,6 @@ osc.start()
 
 ---
 
-# IndexedDB
-
----
-
 # [fit] Service <br>workers
 
 ```js
@@ -1285,29 +1242,9 @@ navigator.bluetooth.requestDevice({
 
 ---
 
-# [fit] Presentation API*
-
-```js
-new PresentationRequest([urls])
-  .start()
-```
+# Our web pages are becoming Things
 
 ---
-
-# [fit] WebVR*
-
-```js
-navigator
-  .getVRDisplays()
-```
-
----
-
-# Web content doesn't have to be
-
----
-
-#
 
 ---
 
@@ -1315,18 +1252,6 @@ navigator
 # How to build things that make a difference
 
 ---
-<!--
-![](day-of-rest-assets/part-4-1.jpg)
-
----
-
-![autoplay](day-of-rest-assets/part-4-2.mp4)
-
-^
-Firstly,
-being able to create something is great!
-
---- -->
 
 # [fit] We're building things
 
@@ -1334,45 +1259,67 @@ being able to create something is great!
 
 # [fit] The usefulness of <br>a thing can be<br>assessed
 
-^
-We tend to think of ourselves as being asssesed by
-* page views
-* tweets
-* shares
-It's about the difference it makes to a person
-
----
-
-![fit](day-of-rest-assets/last-flood-sensor.png)
-
 ---
 
 ![fit](day-of-rest-assets/last-flood-map.png)
+
+^ warns people if flood is going to happen
 
 ---
 
 ![fit](day-of-rest-assets/last-gerard.png)
 
+^ Make me get on a bike and cycle
+
 ---
 
 ![fit](day-of-rest-assets/last-ador.png)
 
----
+^ Bring us all here together today
 
-# [fit] When you're <br/>making <br/>something
+<!-- ---
 
----
-
-# [fit] make<br>a difference<br>to someone
+# Don't worry about page views, shares or likes
 
 ---
 
-# [fit] Thank you
+# Don't worry about page views, shares or likes
+
+# Try to make a difference for people -->
+
+---
+
+# [fit] When you're <br/>building <br/>something
+
+---
+
+# [fit] make<br>a difference<br>for someone
+
+---
+
+# [fit] Thank you <br/>for listening
 
 ## @benjaminbenben
 
+---
+
+
+
+- [github.com/benfoxall/mqtt-wp](https://github.com/benfoxall/mqtt-wp)
+- [github.com/benfoxall/ador-puck-demo](https://github.com/benfoxall/ador-puck-demo)
+- [github.com/benfoxall/puck-mqtt](https://github.com/benfoxall/puck-mqtt)
 
 <!--
+Photos:
+
+SR-71:
+* https://commons.wikimedia.org/w/index.php?curid=54004278
+* https://commons.wikimedia.org/w/index.php?curid=30816
+* https://commons.wikimedia.org/w/index.php?curid=25099554
+* https://commons.wikimedia.org/w/index.php?curid=3492838
+
+
+
 
 Photos:
 
